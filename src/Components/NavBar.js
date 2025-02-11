@@ -38,8 +38,18 @@ function NavBar(props) {
       >
         {isAuthenticated ? (
           <ul>
-            <span>Bonjour, {user.nom}</span>
-            <button onClick={handleLogout}>Se déconnecter</button>
+            <span
+              style={{ height: "40px", display: "flex", alignItems: "center" }}
+            >
+              Bonjour, {user.nom}
+            </span>
+            <button
+              onClick={handleLogout}
+              style={{ height: "40px" }}
+              className="btn"
+            >
+              Se déconnecter
+            </button>
           </ul>
         ) : (
           <ul>
