@@ -1,0 +1,48 @@
+.Login {
+    width: 60%;
+    height: 40vw;
+    background: #c2c2c2;
+    box-sizing: border-box;
+    border: 1px solid black;
+    border-radius: 0 40px 40px 0;
+    text-align: center;
+}
+
+.Create {
+    width: 40%;
+    height: 40vw;
+    background: #c2c2c2;
+    box-sizing: border-box;
+    border: 1px solid black;
+    border-radius: 40px 0 0 40px;
+    text-align: center;
+}
+
+.formLigne {
+    display: block;
+    height: 60px;
+    border-radius: 15px;
+    border: 1px solid black;
+    padding-left: 10px;
+    color: #e0e0e0;
+    font-size: 14px;
+    background-color: #4a4a4a;
+    margin: 5px auto;
+}
+
+.formLigne::placeholder {
+    font-size: 14px;
+    color: #e0e0e0;
+}
+
+.Login button, .Create button {
+    display: block;
+    height: 60px;
+    width: 15%;
+    border-radius: 15px;
+    border: 1px solid black;
+    color: #e0e0e0;
+    font-size: 14px;
+    background-color: #4a4a4a;
+    margin: 5px auto;
+}
