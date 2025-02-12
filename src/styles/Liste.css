@@ -1,28 +1,32 @@
-.boutonFond {
-    display: flex;
-    align-items: center;
-    width: 150px;
-    height: 50px;
-    border-radius: 25px;
-    background: green;
-}
-
-.boutonExt {
-    display: flex;
-    align-items: center;
-    width: 40px;
-    height: 40px;
-    background: linear-gradient(-50grad, #aaa, #444);
-    border-radius: 50%;
-    margin: 5px;
-}
-
-.boutonInt {
-    width: 30px;
+#search-bar {
     height: 30px;
-    background: linear-gradient(-50grad, #444, #aaa);
-    border-radius: 50%;
-    margin: 5px;
+    border-radius: 15px;
+    border: 2px solid black;
+    padding-left: 10px;
+    color: #e0e0e0;
+    font-size: 14px;
+    background-color: #404040;
+}
+
+#search-bar::placeholder {
+    font-size: 14px;
+    color: #e0e0e0;
+}
+
+#Reset {
+    height: 30px;
+    border-radius: 10px;
+    border: 1px solid black;
+    background: linear-gradient(#b0b0b0, #404040) no-repeat;
+}
+
+.button {
+    border-radius: 10px;
+    background: linear-gradient(#b0b0b0, #606060) no-repeat;
+}
+
+.button:hover, #Reset:hover {
+    background: linear-gradient(#606060, #b0b0b0) no-repeat;
 }
 
 .cate {
@@ -31,4 +35,8 @@
     align-items: start;
     width: 15%;
     margin: 0 15px;
+}
+
+.recherche-reset {
+    padding-bottom: 25px;
 }

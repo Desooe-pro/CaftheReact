@@ -6,7 +6,6 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import "../styles/Liste.css";
 import Liste from "../Components/Liste";
-import Trie from "../Components/Trie";
 axios.defaults.headers.common["Authorization"] =
   `Bearer ${localStorage.getItem("access_token")}`;
 
@@ -16,9 +15,9 @@ function ProductList() {
   const [affiche, setAffiche] = useState(9);
   const [texteTrie, setTexteTrie] = useState("");
   const [Tags, setTags] = useState([
-    { nom: "Thé", active: true },
+    { nom: "Thé", active: false },
     { nom: "Café", active: false },
-    { nom: "Accéssoires", active: false },
+    { nom: "Accéssoire", active: false },
   ]);
 
   function HandlePrecedent() {
@@ -28,7 +27,7 @@ function ProductList() {
   }
 
   function HandleSuivant() {
-    if (affiche <= produits.length) {
+    if (affiche < produit.length) {
       setAffiche(affiche + 9);
     }
   }
@@ -36,9 +35,53 @@ function ProductList() {
   function HandleCheck(e, id) {
     let temp = [...Tags];
     temp[id].active = e.target.checked;
-    setProduits(produits);
+    setAffiche(9);
     setTags(temp);
   }
+
+  function HandleTexte(e) {
+    setTexteTrie(e.target.value);
+    setAffiche(9);
+  }
+
+  const TrieTags = (tags) => {
+    if (tags.length > 0) {
+      produit = produit.filter((produit) => tags.includes(produit.tag));
+    }
+    if (texteTrie !== "") {
+      console.log(texteTrie);
+      produit = produit.filter(
+        (produit) =>
+          produit.nom.includes(texteTrie) ||
+          produit.nom.toLowerCase().includes(texteTrie) ||
+          produit.nom
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .includes(texteTrie) ||
+          produit.nom
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .toLowerCase()
+            .includes(texteTrie),
+      );
+    }
+  };
+
+  const LoopTags = async () => {
+    let tags = [];
+    for (let loop = 0; loop < Tags.length; loop++) {
+      if (Tags[loop].active) {
+        tags.push(Tags[loop].nom);
+      }
+    }
+    await TrieTags(tags);
+  };
+
+  const launch = async () => {
+    try {
+      await LoopTags();
+    } catch (error) {}
+  };
 
   useEffect(() => {
     const fetchProduits = async () => {
@@ -95,9 +138,27 @@ function ProductList() {
     );
   }
 
+  let produit = produits;
+  launch();
+
   return (
-    <div style={{ textAlign: "center" }}>
+    <div
+      style={{ display: "flex", flexDirection: "column", textAlign: "center" }}
+    >
       <h3>Liste des produits</h3>
+      <div className="recherche-reset">
+        <form action="#" method="post" onSubmit={(e) => e.preventDefault()}>
+          <label>
+            <input
+              id="search-bar"
+              type="text"
+              placeholder="Tapez votre texte"
+              onChange={(e) => HandleTexte(e)}
+            />
+          </label>
+          <button id="Reset">Reset</button>
+        </form>
+      </div>
       <div
         className="principal"
         style={{ display: "flex", flexDirection: "row", margin: "0 auto" }}
@@ -142,11 +203,12 @@ function ProductList() {
           </fieldset>
         </div>
         <div className="Liste">
-          <Trie
-            produits={produits}
-            texteTrie={texteTrie}
-            affiche={affiche}
-            Tags={Tags}
+          <Liste
+            produits={
+              affiche <= produit.length
+                ? produit.slice(affiche - 9, affiche)
+                : produit.slice(affiche - 9)
+            }
           />
           <button
             className="btn"
