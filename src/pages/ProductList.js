@@ -52,14 +52,12 @@ function ProductList() {
       console.log(texteTrie);
       produit = produit.filter(
         (produit) =>
-          produit.nom.includes(texteTrie) ||
-          produit.nom.toLowerCase().includes(texteTrie) ||
-          produit.nom
-            .normalize("NFD")
+          produit.Designation_Article.includes(texteTrie) ||
+          produit.Designation_Article.toLowerCase().includes(texteTrie) ||
+          produit.Designation_Article.normalize("NFD")
             .replace(/[\u0300-\u036f]/g, "")
             .includes(texteTrie) ||
-          produit.nom
-            .normalize("NFD")
+          produit.Designation_Article.normalize("NFD")
             .replace(/[\u0300-\u036f]/g, "")
             .toLowerCase()
             .includes(texteTrie),
