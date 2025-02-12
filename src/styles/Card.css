@@ -9,6 +9,12 @@
 }
 
 .principal {
+    display: flex;
+    justify-content: space-evenly;
+    width: 80%;
+}
+
+.Liste {
     width: 920px;
 }
 
@@ -69,7 +75,7 @@ ul {
         height: 2790px;
         grid-template-columns: repeat(1, 300px);
     }
-    .principal {
+    .Liste {
         width: 320px;
     }
 }

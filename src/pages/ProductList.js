@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import ProductCard from "../Components/ProductCard";
 /* npm install axios */
 /* npm install react-loading-skeleton */
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import "../styles/Liste.css";
 import Liste from "../Components/Liste";
+import Trie from "../Components/Trie";
 axios.defaults.headers.common["Authorization"] =
   `Bearer ${localStorage.getItem("access_token")}`;
 
@@ -14,6 +14,13 @@ function ProductList() {
   const [produits, setProduits] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [affiche, setAffiche] = useState(9);
+  const [texteTrie, setTexteTrie] = useState("");
+  const [Tags, setTags] = useState(0);
+  const [Checkboxs, setCheckboxs] = [
+    { nom: "Thé", checkbox: document.getElementById("Thé") },
+    { nom: "Café", checkbox: document.getElementById("Café") },
+    { nom: "Accéssoire", checkbox: document.getElementById("Accéssoire") },
+  ];
 
   function HandlePrecedent() {
     if (affiche >= 18) {
@@ -27,18 +34,18 @@ function ProductList() {
     }
   }
 
+  function HandleTags() {
+    setTags(Tags + 1);
+  }
+
   useEffect(() => {
     const fetchProduits = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:3000/api/produits",
-          null,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-            },
+        const response = await axios.get("http://localhost:3000/api/produits", {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
-        );
+        });
         setProduits(response.data);
       } catch (error) {
         console.error("Erreur de chargement des produits ", error);
@@ -50,6 +57,16 @@ function ProductList() {
     };
     void fetchProduits();
   }, []);
+
+  for (let i = 0; i < produits.length; i++) {
+    if (produits[i].Designation_Article.includes("Thé")) {
+      produits[i].tag = "Thé";
+    } else if (produits[i].Designation_Article.includes("Café")) {
+      produits[i].tag = "Café";
+    } else {
+      produits[i].tag = "Accéssoire";
+    }
+  }
 
   if (isLoading) {
     return (
@@ -79,42 +96,66 @@ function ProductList() {
   return (
     <div style={{ textAlign: "center" }}>
       <h3>Liste des produits</h3>
-      <div className="principal" style={{ margin: "0 auto" }}>
-        {/*<div>
-                    <fieldset style={{height: "150px"}}>
-                        <legend>Select the categories you want to select : </legend>
-                        <div className="boutonFond" onClick={}>
-                            <div className="boutonExt">
-                                <div className="boutonInt"></div>
-                            </div>
-                        </div>
-                        <div></div>
-                        <div></div>
-                    </fieldset>
-                </div>*/}
-        <Liste
-          produits={
-            affiche <= produits.length
-              ? produits.slice(affiche - 9, affiche)
-              : produits.slice(affiche - 9)
-          }
-        />
-      </div>
-      <div>
-        <button
-          className="btn"
-          style={{ width: "100px" }}
-          onClick={HandlePrecedent}
-        >
-          ◀ Précédent
-        </button>
-        <button
-          className="btn"
-          style={{ width: "100px" }}
-          onClick={HandleSuivant}
-        >
-          Suivant ▶
-        </button>
+      <div
+        className="principal"
+        style={{ display: "flex", flexDirection: "row", margin: "0 auto" }}
+      >
+        <div className="cate">
+          <fieldset
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "start",
+              width: "100%",
+            }}
+          >
+            <legend>Select the categories you want to select : </legend>
+            <div>
+              <input type="checkbox" id="Thé" name="Thé" onClick={HandleTags} />
+              <label>Thé</label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="Accéssoire"
+                name="Accéssoire"
+                onClick={HandleTags}
+              />
+              <label>Accéssoire</label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="Café"
+                name="Café"
+                onClick={HandleTags}
+              />
+              <label>Café</label>
+            </div>
+          </fieldset>
+        </div>
+        <div className="Liste">
+          <Trie
+            produits={produits}
+            texteTrie={texteTrie}
+            affiche={affiche}
+            Checkboxs={Checkboxs}
+          />
+          <button
+            className="btn"
+            style={{ width: "100px" }}
+            onClick={HandlePrecedent}
+          >
+            ◀ Précédent
+          </button>
+          <button
+            className="btn"
+            style={{ width: "100px" }}
+            onClick={HandleSuivant}
+          >
+            Suivant ▶
+          </button>
+        </div>
       </div>
     </div>
   );
