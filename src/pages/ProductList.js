@@ -15,12 +15,11 @@ function ProductList() {
   const [isLoading, setIsLoading] = useState(true);
   const [affiche, setAffiche] = useState(9);
   const [texteTrie, setTexteTrie] = useState("");
-  const [Tags, setTags] = useState(0);
-  const [Checkboxs, setCheckboxs] = [
-    { nom: "Thé", checkbox: document.getElementById("Thé") },
-    { nom: "Café", checkbox: document.getElementById("Café") },
-    { nom: "Accéssoire", checkbox: document.getElementById("Accéssoire") },
-  ];
+  const [Tags, setTags] = useState([
+    { nom: "Thé", active: true },
+    { nom: "Café", active: false },
+    { nom: "Accéssoires", active: false },
+  ]);
 
   function HandlePrecedent() {
     if (affiche >= 18) {
@@ -34,8 +33,11 @@ function ProductList() {
     }
   }
 
-  function HandleTags() {
-    setTags(Tags + 1);
+  function HandleCheck(e, id) {
+    let temp = [...Tags];
+    temp[id].active = e.target.checked;
+    setProduits(produits);
+    setTags(temp);
   }
 
   useEffect(() => {
@@ -59,9 +61,9 @@ function ProductList() {
   }, []);
 
   for (let i = 0; i < produits.length; i++) {
-    if (produits[i].Designation_Article.includes("Thé")) {
+    if (produits[i].Designation_Article.includes("Thé ")) {
       produits[i].tag = "Thé";
-    } else if (produits[i].Designation_Article.includes("Café")) {
+    } else if (produits[i].Designation_Article.includes("Café ")) {
       produits[i].tag = "Café";
     } else {
       produits[i].tag = "Accéssoire";
@@ -109,28 +111,33 @@ function ProductList() {
               width: "100%",
             }}
           >
-            <legend>Select the categories you want to select : </legend>
-            <div>
-              <input type="checkbox" id="Thé" name="Thé" onClick={HandleTags} />
-              <label>Thé</label>
-            </div>
+            <legend>Select the categories you want to select :</legend>
             <div>
               <input
                 type="checkbox"
-                id="Accéssoire"
-                name="Accéssoire"
-                onClick={HandleTags}
+                id="Thé"
+                name="Thé"
+                onClick={(e) => HandleCheck(e, 0)}
               />
-              <label>Accéssoire</label>
+              <label>Thé</label>
             </div>
             <div>
               <input
                 type="checkbox"
                 id="Café"
                 name="Café"
-                onClick={HandleTags}
+                onClick={(e) => HandleCheck(e, 1)}
               />
               <label>Café</label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="Accéssoire"
+                name="Accéssoire"
+                onClick={(e) => HandleCheck(e, 2)}
+              />
+              <label>Accéssoire</label>
             </div>
           </fieldset>
         </div>
@@ -139,7 +146,7 @@ function ProductList() {
             produits={produits}
             texteTrie={texteTrie}
             affiche={affiche}
-            Checkboxs={Checkboxs}
+            Tags={Tags}
           />
           <button
             className="btn"
