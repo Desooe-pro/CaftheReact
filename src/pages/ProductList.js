@@ -5,9 +5,10 @@ import axios from "axios";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import "../styles/Liste.css";
+import "../styles/Checkbox.css";
 import Liste from "../Components/Liste";
 axios.defaults.headers.common["Authorization"] =
-  `Bearer ${localStorage.getItem("access_token")}`;
+  `Bearer ${localStorage.getItem("token")}`;
 
 function ProductList() {
   const [produits, setProduits] = useState([]);
@@ -34,7 +35,7 @@ function ProductList() {
 
   function HandleCheck(e, id) {
     let temp = [...Tags];
-    temp[id].active = e.target.checked;
+    temp[id].active = e.checked;
     setAffiche(9);
     setTags(temp);
   }
@@ -44,12 +45,27 @@ function ProductList() {
     setAffiche(9);
   }
 
+  function HandleReset() {
+    setTexteTrie("");
+    const e = document.getElementById("search-bar");
+    const The = document.getElementById("Thé");
+    const Cafe = document.getElementById("Café");
+    const Accessoire = document.getElementById("Accéssoire");
+    e.value = "";
+    The.checked = false;
+    Cafe.checked = false;
+    Accessoire.checked = false;
+    let lstTemp = [The, Cafe, Accessoire];
+    for (let i = 0; i < Tags.length; i++) {
+      HandleCheck(lstTemp[i], i);
+    }
+  }
+
   const TrieTags = (tags) => {
     if (tags.length > 0) {
       produit = produit.filter((produit) => tags.includes(produit.tag));
     }
     if (texteTrie !== "") {
-      console.log(texteTrie);
       produit = produit.filter(
         (produit) =>
           produit.Designation_Article.includes(texteTrie) ||
@@ -84,11 +100,7 @@ function ProductList() {
   useEffect(() => {
     const fetchProduits = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/produits", {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        });
+        const response = await axios.get("http://localhost:3000/api/produits");
         setProduits(response.data);
       } catch (error) {
         console.error("Erreur de chargement des produits ", error);
@@ -115,7 +127,7 @@ function ProductList() {
     return (
       <div className="product-list">
         {Array.from({ length: 9 }).map((_, i) => (
-          <div className="container">
+          <div>
             <div key={i} className="product-skeleton">
               <div>
                 <Skeleton height={150} width={150} />
@@ -144,84 +156,101 @@ function ProductList() {
       style={{ display: "flex", flexDirection: "column", textAlign: "center" }}
     >
       <h3>Liste des produits</h3>
-      <div className="recherche-reset">
-        <form action="#" method="post" onSubmit={(e) => e.preventDefault()}>
-          <label>
-            <input
-              id="search-bar"
-              type="text"
-              placeholder="Tapez votre texte"
-              onChange={(e) => HandleTexte(e)}
-            />
-          </label>
-          <button id="Reset">Reset</button>
-        </form>
-      </div>
       <div
         className="principal"
-        style={{ display: "flex", flexDirection: "row", margin: "0 auto" }}
+        style={{ display: "flex", flexDirection: "row" }}
       >
         <div className="cate">
-          <fieldset
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "start",
-              width: "100%",
-            }}
-          >
+          <fieldset className="FieldTags">
             <legend>Select the categories you want to select :</legend>
-            <div>
+            <div className="switch-container">
               <input
                 type="checkbox"
                 id="Thé"
                 name="Thé"
-                onClick={(e) => HandleCheck(e, 0)}
+                className="slideThree"
+                onClick={(e) => HandleCheck(e.target, 0)}
               />
-              <label>Thé</label>
+              <label htmlFor="Thé" style={{ visibility: "hidden" }}>
+                Thé<span></span>
+              </label>
             </div>
-            <div>
+            <div className="switch-container">
               <input
                 type="checkbox"
                 id="Café"
                 name="Café"
-                onClick={(e) => HandleCheck(e, 1)}
+                className="slideThree"
+                onClick={(e) => HandleCheck(e.target, 1)}
               />
-              <label>Café</label>
+              <label htmlFor="Café" style={{ visibility: "hidden" }}>
+                Café<span></span>
+              </label>
             </div>
-            <div>
+            <div className="switch-container">
               <input
                 type="checkbox"
                 id="Accéssoire"
                 name="Accéssoire"
-                onClick={(e) => HandleCheck(e, 2)}
+                className="slideThree"
+                onClick={(e) => HandleCheck(e.target, 2)}
               />
-              <label>Accéssoire</label>
+              <label htmlFor="Accéssoire" style={{ visibility: "hidden" }}>
+                Accéssoire<span></span>
+              </label>
             </div>
           </fieldset>
         </div>
-        <div className="Liste">
-          <Liste
-            produits={
-              affiche <= produit.length
-                ? produit.slice(affiche - 9, affiche)
-                : produit.slice(affiche - 9)
-            }
-          />
-          <button
-            className="btn"
-            style={{ width: "100px" }}
-            onClick={HandlePrecedent}
-          >
-            ◀ Précédent
-          </button>
-          <button
-            className="btn"
-            style={{ width: "100px" }}
-            onClick={HandleSuivant}
-          >
-            Suivant ▶
-          </button>
+        <div>
+          <div className="recherche-reset">
+            <form
+              action="#"
+              method="post"
+              onSubmit={(e) => e.preventDefault()}
+              style={{ width: "90%" }}
+            >
+              <label>
+                <input
+                  id="search-bar"
+                  type="text"
+                  placeholder="Tapez votre texte"
+                  onChange={(e) => HandleTexte(e)}
+                />
+              </label>
+              <button id="Reset" onClick={(e) => HandleReset(e)}>
+                Reset
+              </button>
+            </form>
+          </div>
+          <div className="Liste">
+            <Liste
+              produits={
+                affiche <= produit.length
+                  ? produit.slice(affiche - 9, affiche)
+                  : produit.slice(affiche - 9)
+              }
+            />
+
+            <a href={affiche < 18 ? "#Bouton" : "#search-bar"}>
+              <button
+                id={"Bouton"}
+                className={affiche >= 18 ? "btn" : "btnDown"}
+                style={{ width: "100px" }}
+                onClick={HandlePrecedent}
+              >
+                ◀ Précédent
+              </button>
+            </a>
+            <a href={affiche + 1 > produit.length ? "#Bouton" : "#search-bar"}>
+              <button
+                className={affiche < produit.length ? "btn" : "btnDown"}
+                style={{ width: "100px" }}
+                onClick={HandleSuivant}
+              >
+                Suivant ▶
+              </button>
+            </a>
+          </div>
         </div>
       </div>
     </div>

@@ -1,0 +1,170 @@
+/* Base styles pour cacher les checkboxes originaux */
+input[type=checkbox].slideThree {
+    position: absolute;
+    visibility: hidden;
+    margin: 0;
+    z-index: -1;
+}
+
+/* Conteneur pour le switch */
+.switch-container {
+    visibility: visible;
+    position: relative;
+    display: inline-block;
+    margin: 10px 60px;
+}
+
+/* Style pour le label et le switch */
+input[type=checkbox].slideThree + label {
+    visibility: visible;
+    position: relative;
+    padding-left: 90px;
+    cursor: pointer;
+    display: inline-block;
+    line-height: 26px;
+    min-height: 26px;
+}
+
+/* Fond du switch */
+input[type=checkbox].slideThree + label:before {
+    visibility: visible;
+    content: '';
+    width: 80px;
+    height: 26px;
+    background: #333;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-radius: 50px;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.5), 0 1px 0 rgba(255,255,255,0.2);
+}
+
+input[type=checkbox][id="Thé"].slideThree:checked + label:before {
+    visibility: visible;
+    content: '';
+    width: 80px;
+    height: 26px;
+    background: #596B47;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-radius: 50px;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.5), 0 1px 0 rgba(255,255,255,0.2);
+}
+
+input[type=checkbox][id="Café"].slideThree:checked + label:before {
+    visibility: visible;
+    content: '';
+    width: 80px;
+    height: 26px;
+    background: #372111;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-radius: 50px;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.5), 0 1px 0 rgba(255,255,255,0.2);
+}
+
+input[type=checkbox][id="Accéssoire"].slideThree:checked + label:before {
+    visibility: visible;
+    content: '';
+    width: 80px;
+    height: 26px;
+    background: linear-gradient(#979797 0%, #575757 40%, #808080 50%, #575757 60%, #373737 100%);
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-radius: 50px;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.5), 0 1px 0 rgba(255,255,255,0.2);
+}
+
+
+
+/* Texte ON */
+input[type=checkbox].slideThree + label:after {
+    visibility: visible;
+    content: 'ON';
+    font: 12px/26px Arial, sans-serif;
+    color: #00bf00;
+    position: absolute;
+    left: 10px;
+    top: 0;
+    z-index: 0;
+    font-weight: bold;
+    text-shadow: 1px 1px 0 rgba(255,255,255,.15);
+}
+
+/* Texte OFF */
+
+input[type=checkbox].slideThree:not(:checked) + label span:after {
+    visibility: visible;
+    content: 'OFF';
+    font: 12px/26px Arial, sans-serif;
+    color: #000;
+    position: absolute;
+    left: 50px;
+    top: 0;
+    z-index: 0;
+    font-weight: bold;
+    text-shadow: 1px 1px 0 rgba(255,255,255,.15);
+}
+
+/* Bouton slider */
+input[type=checkbox][id="Thé"].slideThree + label span:before {
+    visibility: visible;
+    content: 'Thé';
+    font: 12px/21px Arial, sans-serif;
+    font-weight: bold;
+    color: #000;
+    width: 34px;
+    height: 20px;
+    background: linear-gradient(#fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    border-radius: 50px;
+    transition: all .4s ease;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.3);
+    z-index: 1;
+}
+
+input[type=checkbox][id="Café"].slideThree + label span:before {
+    visibility: visible;
+    content: 'Café';
+    font: 12px/21px Arial, sans-serif;
+    font-weight: bold;
+    color: #000;
+    width: 34px;
+    height: 20px;
+    background: linear-gradient(#fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    border-radius: 50px;
+    transition: all .4s ease;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.3);
+    z-index: 1;
+}
+
+input[type=checkbox][id="Accéssoire"].slideThree + label span:before {
+    visibility: visible;
+    content: 'Accé';
+    font: 12px/21px Arial, sans-serif;
+    font-weight: bold;
+    width: 34px;
+    height: 20px;
+    background: linear-gradient(#fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    border-radius: 50px;
+    transition: all .4s ease;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.3);
+    z-index: 1;
+}
+
+/* Position du bouton quand cochée */
+input[type=checkbox].slideThree:checked + label span:before {
+    visibility: visible;
+    left: 43px;
+}
