@@ -25,10 +25,10 @@ function Login() {
         "http://localhost:3000/api/clients/login/connexion",
         { mail: mail, pw: pw },
       );
-      const { client, token } = response.data;
+      const { client, token, adresse } = response.data;
 
       // On met à jour le contexte d'authentification
-      login(token, client);
+      login(token, client, adresse);
 
       // Redirection du client vers une page
       navigate("/");

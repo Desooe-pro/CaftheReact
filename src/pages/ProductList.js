@@ -11,6 +11,7 @@ axios.defaults.headers.common["Authorization"] =
   `Bearer ${localStorage.getItem("token")}`;
 
 function ProductList() {
+  const collator = new Intl.Collator("fr", { sensitivity: "base" });
   const [produits, setProduits] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [affiche, setAffiche] = useState(9);
@@ -101,7 +102,18 @@ function ProductList() {
     const fetchProduits = async () => {
       try {
         const response = await axios.get("http://localhost:3000/api/produits");
-        setProduits(response.data);
+        let temp = response.data;
+        for (let i = 0; i < temp.length; i++) {
+          if (temp[i].Designation_Article.includes("Thé ")) {
+            temp[i].tag = "Thé";
+          } else if (temp[i].Designation_Article.includes("Café ")) {
+            temp[i].tag = "Café";
+          } else {
+            temp[i].tag = "Accéssoire";
+          }
+        }
+        temp = temp.sort((a, b) => collator.compare(b.tag, a.tag));
+        setProduits(temp);
       } catch (error) {
         console.error("Erreur de chargement des produits ", error);
       } finally {
@@ -113,43 +125,133 @@ function ProductList() {
     void fetchProduits();
   }, []);
 
-  for (let i = 0; i < produits.length; i++) {
-    if (produits[i].Designation_Article.includes("Thé ")) {
-      produits[i].tag = "Thé";
-    } else if (produits[i].Designation_Article.includes("Café ")) {
-      produits[i].tag = "Café";
-    } else {
-      produits[i].tag = "Accéssoire";
-    }
-  }
+  let produit = produits;
+  launch();
 
   if (isLoading) {
     return (
-      <div className="product-list">
-        {Array.from({ length: 9 }).map((_, i) => (
-          <div>
-            <div key={i} className="product-skeleton">
-              <div>
-                <Skeleton height={150} width={150} />
-                <div style={{ marginTop: "10px" }}>
-                  <Skeleton height={30} width="80%" />
-                </div>
-                <div style={{ marginTop: "10px" }}>
-                  <Skeleton height={20} width="40%" />
-                </div>
-                <div style={{ marginTop: "10px" }}>
-                  <Skeleton height={30} width="40%" />
-                </div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          textAlign: "center",
+        }}
+      >
+        <h3>Liste des produits</h3>
+        <div
+          className="principal"
+          style={{ display: "flex", flexDirection: "row" }}
+        >
+          <div className="cate">
+            <fieldset className="FieldTags">
+              <legend>Select the categories you want to select :</legend>
+              <div className="switch-container">
+                <input
+                  type="checkbox"
+                  id="Thé"
+                  name="Thé"
+                  className="slideThree"
+                  onClick={(e) => HandleCheck(e.target, 0)}
+                />
+                <label htmlFor="Thé" style={{ visibility: "hidden" }}>
+                  <span></span>
+                </label>
               </div>
+              <div className="switch-container">
+                <input
+                  type="checkbox"
+                  id="Café"
+                  name="Café"
+                  className="slideThree"
+                  onClick={(e) => HandleCheck(e.target, 1)}
+                />
+                <label htmlFor="Café" style={{ visibility: "hidden" }}>
+                  <span></span>
+                </label>
+              </div>
+              <div className="switch-container">
+                <input
+                  type="checkbox"
+                  id="Accéssoire"
+                  name="Accéssoire"
+                  className="slideThree"
+                  onClick={(e) => HandleCheck(e.target, 2)}
+                />
+                <label htmlFor="Accéssoire" style={{ visibility: "hidden" }}>
+                  <span></span>
+                </label>
+              </div>
+            </fieldset>
+          </div>
+          <div>
+            <div className="recherche-reset">
+              <form
+                action="#"
+                method="post"
+                onSubmit={(e) => e.preventDefault()}
+                style={{ width: "90%" }}
+              >
+                <label>
+                  <input
+                    id="search-bar"
+                    type="text"
+                    placeholder="Tapez votre texte"
+                    onChange={(e) => HandleTexte(e)}
+                  />
+                </label>
+                <button id="Reset" onClick={(e) => HandleReset(e)}>
+                  Reset
+                </button>
+              </form>
+            </div>
+            <div className="Liste">
+              <div className="container">
+                {Array.from({ length: 9 }).map((_, i) => (
+                  <div>
+                    <div key={i} className="product-skeleton">
+                      <div>
+                        <Skeleton height={150} width={150} />
+                        <div style={{ marginTop: "10px" }}>
+                          <Skeleton height={30} width="80%" />
+                        </div>
+                        <div style={{ marginTop: "10px" }}>
+                          <Skeleton height={20} width="40%" />
+                        </div>
+                        <div style={{ marginTop: "10px" }}>
+                          <Skeleton height={30} width="40%" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <a href={affiche < 18 ? "#Bouton" : "#search-bar"}>
+                <button
+                  id={"Bouton"}
+                  className={affiche >= 18 ? "btn" : "btnDown"}
+                  style={{ width: "100px" }}
+                  onClick={HandlePrecedent}
+                >
+                  ◀ Précédent
+                </button>
+              </a>
+              <a
+                href={affiche + 1 > produit.length ? "#Bouton" : "#search-bar"}
+              >
+                <button
+                  className={affiche < produit.length ? "btn" : "btnDown"}
+                  style={{ width: "100px" }}
+                  onClick={HandleSuivant}
+                >
+                  Suivant ▶
+                </button>
+              </a>
             </div>
           </div>
-        ))}
+        </div>
       </div>
     );
   }
-
-  let produit = produits;
-  launch();
 
   return (
     <div
@@ -172,7 +274,7 @@ function ProductList() {
                 onClick={(e) => HandleCheck(e.target, 0)}
               />
               <label htmlFor="Thé" style={{ visibility: "hidden" }}>
-                Thé<span></span>
+                <span></span>
               </label>
             </div>
             <div className="switch-container">
@@ -184,7 +286,7 @@ function ProductList() {
                 onClick={(e) => HandleCheck(e.target, 1)}
               />
               <label htmlFor="Café" style={{ visibility: "hidden" }}>
-                Café<span></span>
+                <span></span>
               </label>
             </div>
             <div className="switch-container">
@@ -196,7 +298,7 @@ function ProductList() {
                 onClick={(e) => HandleCheck(e.target, 2)}
               />
               <label htmlFor="Accéssoire" style={{ visibility: "hidden" }}>
-                Accéssoire<span></span>
+                <span></span>
               </label>
             </div>
           </fieldset>

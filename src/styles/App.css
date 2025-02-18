@@ -1,3 +1,40 @@
+@font-face {
+  font-family: 'picto';
+  src: url('../font/picto.eot?88696497');
+  src: url('../font/picto.eot?88696497#iefix') format('embedded-opentype'),
+  url('../font/picto.woff2?88696497') format('woff2'),
+  url('../font/picto.woff?88696497') format('woff'),
+  url('../font/picto.ttf?88696497') format('truetype'),
+  url('../font/picto.svg?88696497#picto') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"]:before, [class*=" icon-"]:before {
+  font-family: "picto", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+
+  font-variant: normal;
+  text-transform: none;
+
+  line-height: 1em;
+
+  margin-left: .2em;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-user:before { content: '\e801'; } /* '' */
+.icon-basket:before { content: '\e802'; } /* '' */
+
 .App {
   text-align: center;
 }
@@ -35,4 +72,8 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+body {
+  background: #f6bd7a;
 }

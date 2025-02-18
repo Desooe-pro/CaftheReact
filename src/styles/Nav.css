@@ -4,6 +4,7 @@
     padding: 20px 20px;
     overflow: hidden;
     display: flex;
+    align-items: center;
     gap: 20px;
 }
 
@@ -16,4 +17,43 @@
 .nav-active {
     color: #0066ff;
     font-weight: bold;
+}
+
+#social ul {
+    display: flex;
+    flex-direction: column;
+    padding: 0 10px 0 0;
+    padding-inline-start: 0;
+    gap: 0;
+}
+
+#social a::before {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    font-family: 'picto', sans-serif;
+    border: 1px solid black;
+    border-radius: 10px;
+    color: #000;
+    font-size: 20px;
+    margin-bottom: 5px;
+    background: linear-gradient(150grad, #aaa, #444);
+}
+
+#social li:first-of-type a::before {
+    content: '\e801';
+}
+
+#social li:last-of-type a::before {
+    content: '\e802';
+}
+
+#social li:first-of-type a:hover::before {
+    color: #000;
+}
+
+#social li:last-of-type a:hover::before {
+    color: #000;
 }

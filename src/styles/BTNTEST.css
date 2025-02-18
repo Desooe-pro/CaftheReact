@@ -1,0 +1,16 @@
+.BTNTEST {
+    display: flex;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    background: linear-gradient(-50grad, #555, #eee);
+    border-radius: 50%;
+}
+
+.BTNTESTInt {
+    width: 20px;
+    height: 20px;
+    margin: 5px;
+    background: linear-gradient(150grad, #333, #eee);
+    border-radius: 50%;
+}

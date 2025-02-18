@@ -5,7 +5,8 @@ import "../styles/Card.css";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
-function ProductDetails(props) {
+function ProductDetails() {
+  const collator = new Intl.Collator("fr", { sensitivity: "base" });
   const { id } = useParams();
   const [produits, setProduits] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -18,7 +19,15 @@ function ProductDetails(props) {
         const response = await axios.get(
           `http://localhost:3000/api/produits/${id}`,
         );
-        setProduits(response.data);
+        let temp = response.data;
+        if (temp.Designation_Article.includes("Thé ")) {
+          temp.tag = "Thé";
+        } else if (temp.Designation_Article.includes("Café ")) {
+          temp.tag = "Café";
+        } else {
+          temp.tag = "Accéssoire";
+        }
+        setProduits(temp);
       } catch (error) {
         console.error("Erreur de chargement des produits ", error);
       } finally {
@@ -85,7 +94,7 @@ function ProductDetails(props) {
           }}
         >
           <div
-            className="product-card"
+            className={`product-card product-card-${produits.tag}`}
             style={{ width: "95%", minHeight: "600px", marginBottom: "5px" }}
           >
             <div style={{ display: "flex", flexDirection: "row" }}>

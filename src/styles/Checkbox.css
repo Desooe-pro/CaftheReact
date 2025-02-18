@@ -11,7 +11,7 @@ input[type=checkbox].slideThree {
     visibility: visible;
     position: relative;
     display: inline-block;
-    margin: 10px 60px;
+    margin: 10px auto;
 }
 
 /* Style pour le label et le switch */

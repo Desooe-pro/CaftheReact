@@ -6,6 +6,8 @@ import Layout from "./layout/Layout";
 import ProductDetails from "./pages/ProductDetails";
 import { AuthProvider } from "./context/AuthContext";
 import Login from "./pages/Login";
+import BtnTest from "./Components/BtnTest";
+import Compte from "./Components/Compte";
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
             <Route index element={<Home />} />
             <Route path="produit/:id" element={<ProductDetails />} />
             <Route path="login" element={<Login />} />
+            <Route path="btntest" element={<BtnTest />} />
+            <Route path="compte" element={<Compte />} />
             {/*Gestion des pages non trouvées*/}
             <Route path="*" element={<NotFound />} />
           </Route>

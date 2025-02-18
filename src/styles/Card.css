@@ -22,7 +22,7 @@
     justify-content: center;
     width: 300px;
     height: 300px;
-    background: radial-gradient(#aaa, #444) no-repeat;
+    color: white;
     border: 1px solid black;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -30,7 +30,28 @@
     font-family: Arial, sans-serif;
 }
 
+.product-skeleton {
+    background: radial-gradient(#aaa, #444) no-repeat;
+}
+
+.product-card-details {
+    background: radial-gradient(#aaa, #444) no-repeat;
+}
+
+.product-card-Café {
+    background: #372111ee;
+}
+
+.product-card-Thé {
+    background: #596B47ee;
+}
+
+.product-card-Accéssoire {
+    background: linear-gradient(#979797 0%, #575757 30%, #808080 60%, #575757 80%, #373737 100%);
+}
+
 .btn {
+    width: fit-content;
     color: #000;
     background: linear-gradient(150grad, #aaa, #444);
     padding: 5px;
@@ -38,6 +59,7 @@
     border-radius: 5px;
 }
 .btnDown {
+    width: fit-content;
     color: #555;
     background: linear-gradient(150grad, #fff, #999);
     padding: 5px;

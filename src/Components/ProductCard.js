@@ -13,7 +13,10 @@ function ProductCard({ produit }) {
         alignItems: "center",
       }}
     >
-      <div id={`${produit.Id_Article}`} className="product-card">
+      <div
+        id={`${produit.Id_Article}`}
+        className={`product-card product-card-${produit.tag}`}
+      >
         <div>
           {/* image */}
           <Skeleton height={150} width={150} />

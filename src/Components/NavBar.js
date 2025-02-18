@@ -1,61 +1,97 @@
 import React, { useContext } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import "../styles/Nav.css";
 
 function NavBar(props) {
+  const navigate = useNavigate();
   const { user, isAuthenticated, logout } = useContext(AuthContext);
 
   const handleLogout = () => {
     logout();
   };
+
+  const handleLogin = () => {
+    navigate("/login");
+  };
+
   return (
     <nav className="navigation" style={{ display: "flex", flexWrap: "wrap" }}>
-      <div style={{ width: "60%" }}>
-        <ul>
-          <NavLink
-            to={"/"}
-            className={(nav) => (nav.isActive ? "nav-active" : "nav")}
-          >
-            <li>Accueil</li>
-          </NavLink>
-          <NavLink
-            to={"/about"}
-            className={(nav) => (nav.isActive ? "nav-active" : "nav")}
-          >
-            <li>A propos</li>
-          </NavLink>
-        </ul>
-      </div>
       <div
         style={{
+          width: "100%",
           display: "flex",
-          flexDirection: "column",
-          alignItems: "end",
-          width: "40%",
-          textAlign: "end",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
         }}
       >
-        {isAuthenticated ? (
+        <div>
           <ul>
-            <span
-              style={{ height: "40px", display: "flex", alignItems: "center" }}
+            <NavLink
+              to={"/"}
+              className={(nav) => (nav.isActive ? "nav-active" : "nav")}
             >
-              Bonjour, {user.nom}
-            </span>
-            <button
-              onClick={handleLogout}
-              style={{ height: "40px" }}
-              className="btn"
+              <li>Accueil</li>
+            </NavLink>
+            <NavLink
+              to={"/about"}
+              className={(nav) => (nav.isActive ? "nav-active" : "nav")}
             >
-              Se déconnecter
-            </button>
+              <li>A propos</li>
+            </NavLink>
           </ul>
-        ) : (
-          <ul>
-            <NavLink to="/login">Se connecter</NavLink>
-          </ul>
-        )}
+        </div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "end",
+            width: "40%",
+            textAlign: "end",
+          }}
+        >
+          {isAuthenticated ? (
+            <ul>
+              <span
+                style={{
+                  height: "40px",
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                Bonjour, {user.nom}
+              </span>
+              <div id="social">
+                <ul>
+                  <li>
+                    <Link to={"/compte"} />
+                  </li>
+                  <li>
+                    <Link to={"/panier"} />
+                  </li>
+                </ul>
+              </div>
+              <button
+                onClick={handleLogout}
+                style={{ height: "40px" }}
+                className="btn"
+              >
+                Se déconnecter
+              </button>
+            </ul>
+          ) : (
+            <ul style={{ textAlign: "center" }}>
+              <button
+                onClick={handleLogin}
+                style={{ height: "40px" }}
+                className="btn"
+              >
+                Se connecter
+              </button>
+            </ul>
+          )}
+        </div>
       </div>
     </nav>
   );
