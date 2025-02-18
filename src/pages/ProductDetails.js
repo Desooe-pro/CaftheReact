@@ -6,7 +6,6 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
 function ProductDetails() {
-  const collator = new Intl.Collator("fr", { sensitivity: "base" });
   const { id } = useParams();
   const [produits, setProduits] = useState([]);
   const [isLoading, setIsLoading] = useState(true);

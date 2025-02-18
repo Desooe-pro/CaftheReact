@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import "../styles/Compte.css";
 import axios from "axios";
@@ -110,7 +110,7 @@ function Compte() {
     e.preventDefault();
     const ModifPW = async () => {
       try {
-        const response = await axios.put(
+        await axios.put(
           `http://localhost:3000/api/clients/pwmodif/${user.id}`,
           { pw: e.target[0].value },
         );

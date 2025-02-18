@@ -7,7 +7,8 @@ import ProductDetails from "./pages/ProductDetails";
 import { AuthProvider } from "./context/AuthContext";
 import Login from "./pages/Login";
 import BtnTest from "./Components/BtnTest";
-import Compte from "./Components/Compte";
+import Panier from "./pages/Panier";
+import Compte from "./pages/Compte";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route path="login" element={<Login />} />
             <Route path="btntest" element={<BtnTest />} />
             <Route path="compte" element={<Compte />} />
+            <Route path="panier" element={<Panier />} />
             {/*Gestion des pages non trouvées*/}
             <Route path="*" element={<NotFound />} />
           </Route>

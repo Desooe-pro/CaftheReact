@@ -1,0 +1,13 @@
+.PanierPanier {
+    width: 60%;
+    height: 90vh;
+    box-sizing: border-box;
+    border: 1px solid black;
+}
+
+.HistoriquePanier {
+    width: 40%;
+    height: 90vh;
+    box-sizing: border-box;
+    border: 1px solid black;
+}
