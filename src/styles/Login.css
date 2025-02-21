@@ -1,26 +1,254 @@
-.Login {
-    width: 60%;
-    height: 40vw;
-    background: #c2c2c2;
-    box-sizing: border-box;
-    border: 1px solid black;
-    border-radius: 0 40px 40px 0;
-    text-align: center;
+@media screen and (min-width: 769px) {
+    .Login {
+        width: 60%;
+        height: 40vw;
+        background: #c2c2c2;
+        box-sizing: border-box;
+        border: 1px solid black;
+        border-radius: 0 40px 40px 0;
+        text-align: center;
+    }
+
+    .Login form {
+        animation: 0.5s ease-in slideLeftForm;
+    }
+
+    .AnimBTNLeft {
+        position: absolute;
+        animation: 0.5s ease-in slideLeftBTNOut;
+        transform: translateX(-10000px);
+        z-index: 0;
+    }
+
+    .Create {
+        animation: 0.5s ease-in slideRight;
+        width: 40%;
+        min-height: 40vw;
+        background: #c2c2c2;
+        box-sizing: border-box;
+        border: 1px solid black;
+        border-radius: 40px 0 0 40px;
+        text-align: center;
+        z-index: 1;
+    }
+
+    .Create form {
+        animation: 0.5s ease-in slideRightFormOut;
+        transform: translateX(10000px);
+        position: absolute;
+    }
+
+    .AnimBTNRightIn {
+        animation: 0.5s ease-in slideRightBTN;
+    }
+
+    .LoginCreate {
+        animation: 0.5s ease-in slideLeft;
+        width: 40%;
+        min-height: 40vw;
+        background: #c2c2c2;
+        box-sizing: border-box;
+        border: 1px solid black;
+        border-radius: 0 40px 40px 0;
+        text-align: center;
+        z-index: 1;
+    }
+
+    .LoginCreate form {
+        animation: 0.5s ease-in slideLeftFormOut;
+        transform: translateX(-10000px);
+        position: absolute;
+    }
+
+    .AnimBTNLeftIn {
+        animation: 0.5s ease-in slideLeftBTN;
+    }
+
+    .CreateCreate {
+        animation: 0.5s ease-in slideRight;
+        width: 60%;
+        min-height: 40vw;
+        background: #c2c2c2;
+        box-sizing: border-box;
+        border: 1px solid black;
+        border-radius: 40px 0 0 40px;
+        text-align: center;
+    }
+
+    .CreateCreate form {
+        animation: 0.5s ease-in slideRightForm;
+    }
+
+    .AnimBTNRight {
+        position: absolute;
+        animation: 0.5s ease-in slideRightBTNOut;
+        transform: translateX(-10000px);
+        z-index: 0;
+    }
+
+    .adresseCo input {
+        width: 49%;
+    }
 }
 
-.Create {
-    width: 40%;
-    height: 40vw;
-    background: #c2c2c2;
-    box-sizing: border-box;
-    border: 1px solid black;
-    border-radius: 40px 0 0 40px;
-    text-align: center;
+@media screen and (max-width: 768px) {
+    .LoginDivPrinc {
+        flex-wrap: wrap;
+    }
+
+    .Login, .LoginCreate {
+        width: 100%;
+        background: #c2c2c2;
+        box-sizing: border-box;
+        border: 1px solid black;
+        border-radius: 0 0 40px 40px;
+        text-align: center;
+        padding-bottom: 20px;
+    }
+
+    .Login {
+        animation: 0.5s ease-in ExtendLogin;
+    }
+
+    .Login form {
+        animation: 0.5s ease-in slideLeftForm;
+    }
+
+    .AnimBTNLeft {
+        position: absolute;
+        animation: 0.5s ease-in slideLeftBTNOut;
+        transform: translateX(-10000px);
+        z-index: 0;
+    }
+
+    .Create, .CreateCreate {
+        width: 100%;
+        background: #c2c2c2;
+        box-sizing: border-box;
+        border: 1px solid black;
+        border-radius: 40px 40px 0 0;
+        text-align: center;
+        padding-bottom: 20px;
+    }
+
+    .Create {
+        animation: 0.8s ShortenCreate;
+    }
+
+    .Create form {
+        animation: 0.5s ease-in slideRightFormOut;
+        transform: translateX(10000px);
+        position: absolute;
+    }
+
+    .AnimBTNRightIn {
+        animation: 0.5s ease-in slideRightBTN;
+    }
+
+    .LoginCreate {
+        animation: 0.5s ease-in ShortenLogin;
+    }
+
+    .LoginCreate > .Slider, .Create > .Slider {
+        animation: 1.5s rotateUp;
+    }
+
+    .LoginCreate form, .Create form {
+        animation: 0.5s ease-in slideFormOut;
+        transform: translateX(-10000px);
+        position: absolute;
+    }
+
+    .AnimBTNLeftIn {
+        animation: 0.5s ease-in slideLeftBTN;
+    }
+
+    .CreateCreate {
+        animation: 0.5s ExtendCreate;
+    }
+
+    .CreateCreate form {
+        animation: 0.5s ease-in slideLeftForm;
+    }
+
+    .AnimBTNRight {
+        position: absolute;
+        animation: 0.5s ease-in slideRightBTNOut;
+        transform: translateX(-10000px);
+        z-index: 0;
+    }
+
+    @keyframes ShortenLogin {
+        from {
+            height: 358px;
+        }
+        to {
+            height: 152px;
+        }
+    }
+
+    @keyframes ShortenCreate {
+        from {
+            height: 762px;
+        }
+        to {
+            height: 152px;
+        }
+    }
+
+    @keyframes ExtendLogin {
+        from {
+            height: 152px;
+        }
+        to {
+            height: 282px;
+        }
+    }
+
+    @keyframes ExtendCreate {
+        from {
+            height: 152px;
+        }
+        to {
+            height: 762px;
+        }
+    }
+
+    @keyframes rotateUp {
+        from {
+            transform: rotate3d(1, 0, 0, 0deg);
+        }
+        to {
+            transform: rotate3d(1, 0, 0, 90deg);
+        }
+    }
+
+    @keyframes rotateDown {
+        from {
+            transform: rotate3d(1, 0, 0, 90deg);
+        }
+        to {
+            transform: rotate3d(1, 0, 0, 0deg);
+        }
+    }
+
+    @keyframes slideFormOut {
+        from {
+            width: 100%;
+            transform: translateX(0);
+        }
+        to {
+            width: 100%;
+            opacity: 0;
+            transform: translateX(-1000px);
+        }
+    }
 }
 
 .formLigne {
     display: block;
     height: 60px;
+    width: 80%;
     border-radius: 15px;
     border: 1px solid black;
     padding-left: 10px;
@@ -35,14 +263,116 @@
     color: #e0e0e0;
 }
 
-.Login button, .Create button {
-    display: block;
+.Login button, .Create button, .CreateCreate button, .LoginCreate button {
     height: 60px;
     width: 15%;
+    min-width: fit-content;
     border-radius: 15px;
     border: 1px solid black;
     color: #e0e0e0;
     font-size: 14px;
     background-color: #4a4a4a;
     margin: 5px auto;
+    padding: 0 10px;
+}
+
+.adresseCo {
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+    margin: 0 auto;
+}
+
+@keyframes slideLeft {
+    from {
+        width: 100%;
+    }
+    to {
+        width: 40%;
+    }
+}
+
+@keyframes slideLeftForm {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0%);
+    }
+}
+
+@keyframes slideLeftFormOut {
+    from {
+        width: 60%;
+        transform: translateX(0%);
+    }
+    to {
+        width: 60%;
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes slideLeftBTN {
+    from {
+        transform: translateX(500%);
+    }
+    to {
+        transform: translateX(0%);
+    }
+}
+
+@keyframes slideLeftBTNOut {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(500%);
+    }
+}
+
+@keyframes slideRight {
+    from {
+        width: 100%;
+    }
+    to {
+        width: 40%;
+    }
+}
+
+@keyframes slideRightForm {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0%);
+    }
+}
+
+@keyframes slideRightFormOut {
+    from {
+        width: 60%;
+        transform: translateX(0%);
+    }
+    to {
+        width: 60%;
+        transform: translateX(100%);
+    }
+}
+
+@keyframes slideRightBTN {
+    from {
+        transform: translateX(-500%);
+    }
+    to {
+        transform: translateX(0%);
+    }
+}
+
+@keyframes slideRightBTNOut {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(-500%);
+    }
 }

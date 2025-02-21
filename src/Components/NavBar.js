@@ -24,9 +24,10 @@ function NavBar(props) {
           flexDirection: "row",
           justifyContent: "space-between",
           alignItems: "center",
+          flexWrap: "wrap",
         }}
       >
-        <div>
+        <div className="NavBase">
           <ul>
             <NavLink
               to={"/"}
@@ -43,11 +44,11 @@ function NavBar(props) {
           </ul>
         </div>
         <div
+          className="navConnexion"
           style={{
             display: "flex",
             flexDirection: "column",
             alignItems: "end",
-            width: "40%",
             textAlign: "end",
           }}
         >

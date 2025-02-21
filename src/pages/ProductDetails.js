@@ -96,7 +96,14 @@ function ProductDetails() {
             className={`product-card product-card-${produits.tag}`}
             style={{ width: "95%", minHeight: "600px", marginBottom: "5px" }}
           >
-            <div style={{ display: "flex", flexDirection: "row" }}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                width: "100%",
+              }}
+            >
               <div
                 style={{
                   textAlign: "start",
@@ -108,13 +115,33 @@ function ProductDetails() {
                   ◀︎ Retour
                 </Link>
               </div>
-              <div style={{ width: "80%" }}>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  width: "80%",
+                }}
+              >
                 <div>
                   <h2>{produits.Designation_Article}</h2>
                 </div>
                 <div>
-                  {/* image */}
-                  <Skeleton height={450} width={450} />
+                  {produits.lienImg === null ? (
+                    <Skeleton
+                      style={{ borderRadius: "10px" }}
+                      height={450}
+                      width={450}
+                    />
+                  ) : (
+                    <img
+                      style={{ borderRadius: "10px" }}
+                      width={450}
+                      height={450}
+                      src={`/img/450/450${produits.lienImg}`}
+                      alt=""
+                    />
+                  )}
                 </div>
                 <div>
                   <p>Prix : {produits.Prix_unitaire_Article} €</p>

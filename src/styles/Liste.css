@@ -32,9 +32,10 @@
     display: flex;
     flex-direction: column;
     align-items: start;
+    font-size: 18px;
     width: 90%;
     border: 0;
-    padding: 0;
+    padding: 0 0 5px 0;
     margin-inline: 0;
     margin: 0 auto;
 }

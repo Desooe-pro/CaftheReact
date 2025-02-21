@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-function LignePanier({ ligne }) {
+function LignePanier({ ligne, Id }) {
   const [produit, setProduit] = useState([]);
 
   useEffect(() => {
@@ -27,9 +27,9 @@ function LignePanier({ ligne }) {
         <p>{produit.Designation_Article}</p>
       </div>
       <div className="nb">
-        <button className={"btnNB"}>▼</button>
+        <button className={"btnNBDown"}>▼</button>
         <p>{ligne.Quantite_Ligne_de_panier}</p>
-        <button className={"btnNB"}>▲</button>
+        <button className={"btnNBUp"}>▲</button>
       </div>
       <div>
         <p>{produit.Prix_unitaire_Article}</p>
