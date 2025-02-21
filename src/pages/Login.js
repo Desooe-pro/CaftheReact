@@ -59,7 +59,7 @@ function Login() {
           <h3>Vous avez déjà un compte</h3>
           {!create ? (
             <button className="AnimBTNLeft" onClick={() => setCreate(!create)}>
-              Connexion
+              Se connecter
             </button>
           ) : (
             ""
@@ -97,7 +97,7 @@ function Login() {
               className="AnimBTNLeftIn"
               onClick={() => setCreate(!create)}
             >
-              Connexion
+              Se connecter
             </button>
           ) : (
             ""
@@ -109,8 +109,8 @@ function Login() {
         >
           <h3>Vous n'avez pas encore de compte</h3>
           {create ? (
-            <button className="AnimBTNLeft" onClick={() => setCreate(!create)}>
-              Connexion
+            <button className="AnimBTNRight" onClick={() => setCreate(!create)}>
+              Créer un compte
             </button>
           ) : (
             ""
@@ -177,17 +177,17 @@ function Login() {
                   {errorMsg}
                 </div>
               )}
-              <button>Connexion</button>
+              <button>Créer</button>
             </form>
           </div>
           {create ? (
             ""
           ) : (
             <button
-              className="AnimBTNLeftIn"
+              className="AnimBTNRightIn"
               onClick={() => setCreate(!create)}
             >
-              Connexion
+              Créer un compte
             </button>
           )}
         </div>
