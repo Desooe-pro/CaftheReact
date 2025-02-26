@@ -136,8 +136,6 @@ function ProductDetails() {
                   ) : (
                     <img
                       style={{ borderRadius: "10px" }}
-                      width={450}
-                      height={450}
                       src={`/img/450/450${produits.lienImg}`}
                       alt=""
                     />
