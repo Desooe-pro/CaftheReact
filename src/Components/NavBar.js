@@ -18,6 +18,7 @@ function NavBar(props) {
   return (
     <nav className="navigation" style={{ display: "flex", flexWrap: "wrap" }}>
       <div
+        className="column"
         style={{
           width: "100%",
           display: "flex",
@@ -33,13 +34,13 @@ function NavBar(props) {
               to={"/"}
               className={(nav) => (nav.isActive ? "nav-active" : "nav")}
             >
-              <li>Accueil</li>
-            </NavLink>
-            <NavLink
-              to={"/about"}
-              className={(nav) => (nav.isActive ? "nav-active" : "nav")}
-            >
-              <li>A propos</li>
+              <img
+                src={"/img/LogoCafThe340.png"}
+                alt={"Logo Cafthé"}
+                width={100}
+                height={100}
+                style={{ background: "none" }}
+              />
             </NavLink>
           </ul>
         </div>
@@ -47,13 +48,18 @@ function NavBar(props) {
           className="navConnexion"
           style={{
             display: "flex",
-            flexDirection: "column",
             alignItems: "end",
             textAlign: "end",
           }}
         >
           {isAuthenticated ? (
-            <ul>
+            <ul
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                textAlign: "center",
+              }}
+            >
               <span
                 style={{
                   height: "40px",
@@ -76,17 +82,23 @@ function NavBar(props) {
               <button
                 onClick={handleLogout}
                 style={{ height: "40px" }}
-                className="btn"
+                className="btn btn2R"
               >
                 Se déconnecter
               </button>
             </ul>
           ) : (
-            <ul style={{ textAlign: "center" }}>
+            <ul
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                textAlign: "center",
+              }}
+            >
               <button
                 onClick={handleLogin}
                 style={{ height: "40px" }}
-                className="btn"
+                className="btn btn2R"
               >
                 Se connecter
               </button>

@@ -92,8 +92,6 @@ input[type=checkbox][id="Accéssoire"].slideThree + label span:before {
     content: 'Accessoire';
 }
 
-
-
 /* Texte ON */
 input[type=checkbox].slideThree + label:after {
     visibility: visible;

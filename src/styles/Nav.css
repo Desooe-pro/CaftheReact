@@ -39,7 +39,7 @@
     color: #000;
     font-size: 20px;
     margin-bottom: 5px;
-    background: linear-gradient(150grad, #aaa, #444);
+    background: linear-gradient(150grad, #efe9e6, #8f7d5e);
 }
 
 #social li:first-of-type a::before {
@@ -59,7 +59,17 @@
 }
 
 @media screen and (max-width: 768px) {
+    .column {
+        flex-direction: column;
+        justify-content: normal;
+    }
+
+    .navConnexion {
+        width: 100%;
+    }
+
     .navConnexion ul {
+        width: 100%;
         padding: 0 20px;
     }
 

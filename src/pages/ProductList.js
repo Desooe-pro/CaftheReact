@@ -315,7 +315,7 @@ function ProductList() {
                 <input
                   id="search-bar"
                   type="text"
-                  placeholder="Tapez votre texte"
+                  placeholder="Que recherchez-vous ?"
                   onChange={(e) => HandleTexte(e)}
                 />
               </label>
@@ -336,7 +336,7 @@ function ProductList() {
             <a href={affiche < 18 ? "#Bouton" : "#search-bar"}>
               <button
                 id={"Bouton"}
-                className={affiche >= 18 ? "btn" : "btnDown"}
+                className={affiche >= 18 ? "btn btn2L" : "btnDown btnDownL"}
                 style={{ width: "100px" }}
                 onClick={HandlePrecedent}
               >
@@ -345,7 +345,9 @@ function ProductList() {
             </a>
             <a href={affiche + 1 > produit.length ? "#Bouton" : "#search-bar"}>
               <button
-                className={affiche < produit.length ? "btn" : "btnDown"}
+                className={
+                  affiche < produit.length ? "btn btn2R" : "btnDown btnDownR"
+                }
                 style={{ width: "100px" }}
                 onClick={HandleSuivant}
               >

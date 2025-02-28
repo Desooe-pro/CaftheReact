@@ -17,13 +17,13 @@ function ProductCard({ produit }) {
         id={`${produit.Id_Article}`}
         className={`product-card product-card-${produit.tag}`}
       >
-        <div style={{ width: "10%" }}></div>
+        <div style={{ width: "8%" }}></div>
         <div
           style={{
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            width: "80%",
+            width: "84%",
             margin: "auto 0",
           }}
         >
@@ -44,11 +44,11 @@ function ProductCard({ produit }) {
           <p style={{ margin: "8px" }}>
             Prix : {produit.Prix_unitaire_Article} €
           </p>
-          <Link to={`/produit/${produit.Id_Article}`} className="btn">
+          <Link to={`/produit/${produit.Id_Article}`} className="btn btn2R">
             Voir détails
           </Link>
         </div>
-        <div style={{ width: "10%" }}></div>
+        <div style={{ width: "8%" }}></div>
       </div>
     </div>
   );

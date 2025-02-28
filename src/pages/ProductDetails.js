@@ -111,7 +111,7 @@ function ProductDetails() {
                   width: "10%",
                 }}
               >
-                <Link to={`/`} className="btn">
+                <Link to={`/`} className="btn btn2R">
                   ◀︎ Retour
                 </Link>
               </div>
@@ -164,10 +164,18 @@ function ProductDetails() {
             width: "100%",
           }}
         >
-          <Link to={lienPre} className="btn2" style={{ marginRight: "5px" }}>
+          <Link
+            to={lienPre}
+            className="btn2 btn2L"
+            style={{ marginRight: "5px" }}
+          >
             ◀ Précédent
           </Link>
-          <Link to={lienSui} className="btn2" style={{ marginLeft: "5px" }}>
+          <Link
+            to={lienSui}
+            className="btn2 btn2R"
+            style={{ marginLeft: "5px" }}
+          >
             Suivant ▶
           </Link>
         </div>

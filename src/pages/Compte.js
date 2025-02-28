@@ -173,8 +173,10 @@ function Compte() {
           )}
 
           <p>
-            Adresse : {adresse.NumeroVoie} {adresse.NomVoie} {adresse.NomVille}{" "}
-            {adresse.CodePostal}{" "}
+            Adresse :{" "}
+            {adresse
+              ? `${adresse.NumeroVoie} ${adresse.NomVoie} ${adresse.NomVille} ${adresse.CodePostal} `
+              : "Votre adresse sera chargé lors de votre prochaine connexion "}
             <button onClick={HandleAdresse} className="btn">
               Modifier
             </button>
