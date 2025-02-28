@@ -130,7 +130,7 @@ function Compte() {
         <div>
           <p>
             Nom : {user.nom}{" "}
-            <button onClick={HandleNom} className="btn">
+            <button onClick={HandleNom} className="btn btn2R">
               Modifier
             </button>
           </p>
@@ -154,7 +154,7 @@ function Compte() {
 
           <p>
             Email : {user.mail}{" "}
-            <button onClick={HandleMail} className="btn">
+            <button onClick={HandleMail} className="btn btn2R">
               Modifier
             </button>
           </p>
@@ -177,7 +177,7 @@ function Compte() {
             {adresse
               ? `${adresse.NumeroVoie} ${adresse.NomVoie} ${adresse.NomVille} ${adresse.CodePostal} `
               : "Votre adresse sera chargé lors de votre prochaine connexion "}
-            <button onClick={HandleAdresse} className="btn">
+            <button onClick={HandleAdresse} className="btn btn2R">
               Modifier
             </button>
           </p>
@@ -209,7 +209,7 @@ function Compte() {
 
           <p>
             Mot de passe{" "}
-            <button onClick={HandlePW} className="btn">
+            <button onClick={HandlePW} className="btn btn2R">
               Modifier
             </button>
           </p>

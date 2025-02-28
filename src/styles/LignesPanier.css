@@ -38,9 +38,9 @@
 }
 
 .btnNBUp, .btnNBDown:hover {
-    background: linear-gradient(#aaa, #444);
+    background: linear-gradient(#efe9e6, #8f7d5e);
 }
 
 .btnNBDown, .btnNBUp:hover {
-    background: linear-gradient(#444, #aaa);
+    background: linear-gradient(#8f7d5e, #efe9e6);
 }
