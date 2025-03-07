@@ -21,6 +21,10 @@ function ProductList() {
     { nom: "Café", active: false },
     { nom: "Accéssoire", active: false },
   ]);
+  const [TagsMesure, setTagsMesure] = useState([
+    { nom: "1", active: false },
+    { nom: "3", active: false },
+  ]);
 
   function HandlePrecedent() {
     if (affiche >= 18) {
@@ -39,6 +43,13 @@ function ProductList() {
     temp[id].active = e.checked;
     setAffiche(9);
     setTags(temp);
+  }
+
+  function HandleCheckMesure(e, id) {
+    let temp = [...TagsMesure];
+    temp[id].active = e.checked;
+    setAffiche(9);
+    setTagsMesure(temp);
   }
 
   function HandleTexte(e) {
@@ -62,9 +73,14 @@ function ProductList() {
     }
   }
 
-  const TrieTags = (tags) => {
+  const TrieTags = (tags, tagsMesure) => {
     if (tags.length > 0) {
       produit = produit.filter((produit) => tags.includes(produit.tag));
+    }
+    if (tagsMesure.length > 0) {
+      produit = produit.filter((produit) =>
+        tagsMesure.includes(produit.Id_Mesure),
+      );
     }
     if (texteTrie !== "") {
       produit = produit.filter(
@@ -84,12 +100,18 @@ function ProductList() {
 
   const LoopTags = async () => {
     let tags = [];
+    let tagsMesure = [];
     for (let loop = 0; loop < Tags.length; loop++) {
       if (Tags[loop].active) {
         tags.push(Tags[loop].nom);
       }
     }
-    await TrieTags(tags);
+    for (let i = 0; i < TagsMesure.length; i++) {
+      if (TagsMesure[i].active) {
+        tagsMesure.push(TagsMesure[i].nom);
+      }
+    }
+    await TrieTags(tags, tagsMesure);
   };
 
   const launch = async () => {
@@ -181,6 +203,30 @@ function ProductList() {
                   <span></span>
                 </label>
               </div>
+              <div className="switch-container">
+                <input
+                  type="checkbox"
+                  id="Poids"
+                  name="Poids"
+                  className="slideThree"
+                  onClick={(e) => HandleCheckMesure(e.target, 0)}
+                />
+                <label htmlFor="Poids" style={{ visibility: "hidden" }}>
+                  <span></span>
+                </label>
+              </div>
+              <div className="switch-container">
+                <input
+                  type="checkbox"
+                  id="Boite"
+                  name="Boite"
+                  className="slideThree"
+                  onClick={(e) => HandleCheckMesure(e.target, 1)}
+                />
+                <label htmlFor="Boite" style={{ visibility: "hidden" }}>
+                  <span></span>
+                </label>
+              </div>
             </fieldset>
           </div>
           <div>
@@ -264,7 +310,9 @@ function ProductList() {
       >
         <div className="cate">
           <fieldset className="FieldTags">
-            <legend>Select the categories you want to select :</legend>
+            <legend>
+              Sélectionnez les catégories que vous souhaitez garder :
+            </legend>
             <div className="switch-container">
               <input
                 type="checkbox"

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
-import "../styles/Card.css";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import AddToCart from "../Components/AddToCart";
+import "../styles/Card.css";
 
 function ProductDetails() {
   const { id } = useParams();
@@ -94,33 +95,41 @@ function ProductDetails() {
         >
           <div
             className={`product-card product-card-${produits.tag}`}
-            style={{ width: "95%", minHeight: "600px", marginBottom: "5px" }}
+            style={{
+              width: "95%",
+              minHeight: "600px",
+              marginBottom: "5px",
+              height: "fit-content",
+            }}
           >
             <div
               style={{
                 display: "flex",
-                flexDirection: "row",
+                flexDirection: "column",
                 justifyContent: "space-between",
                 width: "100%",
               }}
             >
               <div
                 style={{
+                  display: "flex",
+                  justifyContent: "space-between",
                   textAlign: "start",
                   margin: "10px 5px",
-                  width: "10%",
+                  width: "100%",
                 }}
               >
                 <Link to={`/`} className="btn btn2R">
                   ◀︎ Retour
                 </Link>
+                <AddToCart id={produits.Id_Article} />
               </div>
               <div
                 style={{
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "center",
-                  width: "80%",
+                  width: "100%",
                 }}
               >
                 <div>
@@ -146,13 +155,6 @@ function ProductDetails() {
                   <p>{produits.Description_Article}</p>
                 </div>
               </div>
-              <div
-                style={{
-                  textAlign: "start",
-                  margin: "10px 5px",
-                  width: "10%",
-                }}
-              ></div>
             </div>
           </div>
         </div>

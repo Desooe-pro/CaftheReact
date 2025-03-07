@@ -1,0 +1,18 @@
+.btnAdd {
+    margin-right: 14px;
+}
+
+.btnAdd:hover {
+    background: linear-gradient(150grad, #8f7d5e, #efe9e6);
+}
+
+.btnAdd span::before {
+    text-align: center;
+    width: 30px;
+    height: 30px;
+    font-family: 'picto', sans-serif;
+    color: #000;
+    font-size: 20px;
+    margin-bottom: 5px;
+    content: '\e802';
+}

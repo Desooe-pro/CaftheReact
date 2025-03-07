@@ -92,6 +92,22 @@ input[type=checkbox][id="Accéssoire"].slideThree + label span:before {
     content: 'Accessoire';
 }
 
+input[type=checkbox][id="Poids"].slideThree + label span:before {
+    content: 'Poids';
+}
+
+input[type=checkbox][id="Poids"].slideThree:checked + label:before {
+    background: #333;
+}
+
+input[type=checkbox][id="Mesure"].slideThree + label span:before {
+    content: 'Mesure';
+}
+
+input[type=checkbox][id="Mesure"].slideThree:checked + label:before {
+    background: #333;
+}
+
 /* Texte ON */
 input[type=checkbox].slideThree + label:after {
     visibility: visible;
@@ -125,5 +141,5 @@ input[type=checkbox].slideThree:not(:checked) + label span:after {
 /* Position du bouton quand cochée */
 input[type=checkbox].slideThree:checked + label span:before {
     visibility: visible;
-    left: 87px;
+    left: 86px;
 }

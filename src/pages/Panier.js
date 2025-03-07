@@ -11,8 +11,6 @@ function Panier(props) {
   const [panier, setPanier] = useState({});
   const user = JSON.parse(localStorage.getItem("user"));
 
-  console.log(isAuthenticated);
-
   if (!isAuthenticated) {
     navigate("/");
   }

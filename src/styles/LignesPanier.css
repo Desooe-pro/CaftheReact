@@ -18,12 +18,14 @@
 .nb {
     display: flex;
     align-items: center;
+    justify-content: space-around;
     background: linear-gradient(-90deg, #f6b669, #f3c186);
     border: 1px solid black;
     border-top: 0;
     border-bottom: 0;
     border-radius: 10px;
     padding: 0 5px;
+    width: 15%;
 }
 
 .btnNBUp, .btnNBDown {
