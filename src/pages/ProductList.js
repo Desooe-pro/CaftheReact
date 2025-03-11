@@ -79,6 +79,7 @@ function ProductList() {
     for (let i = 0; i < Tags.length; i++) {
       HandleCheck(lstTemp[i], i);
     }
+    HandleCheckMesure(Poids, 0);
   }
 
   const TrieTags = (tags, tagsMesure) => {
