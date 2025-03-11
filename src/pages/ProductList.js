@@ -125,7 +125,9 @@ function ProductList() {
   useEffect(() => {
     const fetchProduits = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/produits");
+        const response = await axios.get(
+          `${process.env.REACT_APP_API_URL}/api/produits`,
+        );
         let temp = response.data;
         for (let i = 0; i < temp.length; i++) {
           if (temp[i].Designation_Article.includes("Thé ")) {

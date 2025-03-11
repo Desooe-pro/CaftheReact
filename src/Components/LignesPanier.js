@@ -11,7 +11,7 @@ function LignesPanier({ Id_Panier }) {
       try {
         if (Id_Panier !== undefined) {
           const response = await axios.get(
-            `http://localhost:3000/api/lignedepanier/${Id_Panier}`,
+            `${process.env.REACT_APP_API_URL}/api/lignedepanier/${Id_Panier}`,
           );
           setLignes(response.data);
         }

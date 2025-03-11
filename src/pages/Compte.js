@@ -33,7 +33,7 @@ function Compte() {
     const ModifNom = async () => {
       try {
         const response = await axios.put(
-          `http://localhost:3000/api/clients/nommodif/${user.id}`,
+          `${process.env.REACT_APP_API_URL}/api/clients/nommodif/${user.id}`,
           { nom: e.target[1].value + " " + e.target[0].value },
         );
         const nom = response.data.nouveauNom;
@@ -57,7 +57,7 @@ function Compte() {
     const ModifMail = async () => {
       try {
         const response = await axios.put(
-          `http://localhost:3000/api/clients/mailmodif/${user.id}`,
+          `${process.env.REACT_APP_API_URL}/api/clients/mailmodif/${user.id}`,
           { mail: e.target[0].value },
         );
         const mail = response.data.nouveauMail;
@@ -80,7 +80,7 @@ function Compte() {
     const ModifAdresse = async () => {
       try {
         const response = await axios.put(
-          `http://localhost:3000/api/clients/adressemodif/${user.id}`,
+          `${process.env.REACT_APP_API_URL}/api/clients/adressemodif/${user.id}`,
           {
             num: e.target[0].value,
             rue: e.target[1].value,
@@ -111,7 +111,7 @@ function Compte() {
     const ModifPW = async () => {
       try {
         await axios.put(
-          `http://localhost:3000/api/clients/pwmodif/${user.id}`,
+          `${process.env.REACT_APP_API_URL}/api/clients/pwmodif/${user.id}`,
           { pw: e.target[0].value },
         );
       } catch (error) {

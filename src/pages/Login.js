@@ -37,7 +37,7 @@ function Login() {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/clients/login/connexion",
+        `${process.env.REACT_APP_API_URL}/api/clients/login/connexion`,
         create === true
           ? { mail: e.target[0].value, pw: e.target[1].value }
           : { mail: mail, pw: pw },
@@ -63,7 +63,7 @@ function Login() {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/clients/register",
+        `${process.env.REACT_APP_API_URL}/api/clients/register`,
         {
           nomPrenom: e.target[7].value + " " + e.target[6].value,
           date: e.target[9].value,
@@ -81,7 +81,7 @@ function Login() {
   const HandleAdresse = async (e, client) => {
     try {
       const res = await axios.post(
-        "http://localhost:3000/api/adresse/register",
+        `${process.env.REACT_APP_API_URL}/api/adresse/register`,
         {
           Numero_de_voie: e.target[2].value,
           Adresse: e.target[3].value,

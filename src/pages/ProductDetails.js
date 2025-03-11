@@ -17,7 +17,7 @@ function ProductDetails() {
     const fetchProduits = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/produits/${id}`,
+          `${process.env.REACT_APP_API_URL}/api/produits/${id}`,
         );
         let temp = response.data;
         if (temp.Designation_Article.includes("Thé ")) {
@@ -42,7 +42,9 @@ function ProductDetails() {
   useEffect(() => {
     const fetchLen = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/produits`);
+        const response = await axios.get(
+          `${process.env.REACT_APP_API_URL}/api/produits`,
+        );
         let len = response.data.length;
         setLienPre(id > 1 ? `/produit/${id - 1}` : `/produit/${id}`);
         setLienSui(

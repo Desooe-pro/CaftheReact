@@ -19,7 +19,7 @@ function Panier() {
     const fetchLignes = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/paniers/client/open/${user.id}`,
+          `${process.env.REACT_APP_API_URL}/api/paniers/client/open/${user.id}`,
         );
         setPanier(response.data);
       } catch (error) {

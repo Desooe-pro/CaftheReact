@@ -11,7 +11,7 @@ function LignePanier({ ligne, Id }) {
       try {
         if (ligne !== undefined) {
           const response = await axios.get(
-            `http://localhost:3000/api/produits/${ligne.Id_Article}`,
+            `${process.env.REACT_APP_API_URL}/api/produits/${ligne.Id_Article}`,
           );
           setProduit(response.data);
         }
@@ -26,7 +26,7 @@ function LignePanier({ ligne, Id }) {
     if (ligne.Id_Panier) {
       try {
         const response = await axios.post(
-          `http://localhost:3000/api/lignedepanier/add`,
+          `${process.env.REACT_APP_API_URL}/api/lignedepanier/add`,
           { Id_Panier: ligne.Id_Panier, Id_Article: ligne.Id_Article },
         );
       } catch (error) {
@@ -39,7 +39,7 @@ function LignePanier({ ligne, Id }) {
     if (ligne.Id_Panier) {
       try {
         const response = await axios.post(
-          `http://localhost:3000/api/lignedepanier/sub`,
+          `${process.env.REACT_APP_API_URL}/api/lignedepanier/sub`,
           { Id_Panier: ligne.Id_Panier, Id_Article: ligne.Id_Article },
         );
       } catch (error) {

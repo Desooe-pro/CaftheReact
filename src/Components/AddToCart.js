@@ -12,7 +12,7 @@ function AddToCart(id) {
   const fetchLignes = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3000/api/paniers/client/open/${user.id}`,
+        `${process.env.REACT_APP_API_URL}/api/paniers/client/open/${user.id}`,
       );
       setPanier(response.data);
     } catch (error) {
@@ -24,7 +24,7 @@ function AddToCart(id) {
     if (panier.Id_Panier) {
       try {
         const response = await axios.post(
-          `http://localhost:3000/api/lignedepanier/add`,
+          `${process.env.REACT_APP_API_URL}/api/lignedepanier/add`,
           { Id_Panier: panier.Id_Panier, Id_Article: id.id },
         );
       } catch (error) {
