@@ -100,11 +100,19 @@ input[type=checkbox][id="Poids"].slideThree:checked + label:before {
     background: #333;
 }
 
-input[type=checkbox][id="Mesure"].slideThree + label span:before {
-    content: 'Mesure';
+input[type=checkbox][id="Boite"].slideThree + label span:before {
+    content: 'Boite';
 }
 
-input[type=checkbox][id="Mesure"].slideThree:checked + label:before {
+input[type=checkbox][id="Boite"].slideThree:checked + label:before {
+    background: #333;
+}
+
+input[type=checkbox][id="Unite"].slideThree + label span:before {
+    content: 'Unité';
+}
+
+input[type=checkbox][id="Unite"].slideThree:checked + label:before {
     background: #333;
 }
 

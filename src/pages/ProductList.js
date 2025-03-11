@@ -7,6 +7,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 import "../styles/Liste.css";
 import "../styles/Checkbox.css";
 import Liste from "../Components/Liste";
+import login from "./Login";
 axios.defaults.headers.common["Authorization"] =
   `Bearer ${localStorage.getItem("token")}`;
 
@@ -23,6 +24,7 @@ function ProductList() {
   ]);
   const [TagsMesure, setTagsMesure] = useState([
     { nom: "1", active: false },
+    { nom: "2", active: false },
     { nom: "3", active: false },
   ]);
 
@@ -47,6 +49,7 @@ function ProductList() {
 
   function HandleCheckMesure(e, id) {
     let temp = [...TagsMesure];
+    temp.forEach((el) => (el.active = false));
     temp[id].active = e.checked;
     setAffiche(9);
     setTagsMesure(temp);
@@ -108,7 +111,7 @@ function ProductList() {
     }
     for (let i = 0; i < TagsMesure.length; i++) {
       if (TagsMesure[i].active) {
-        tagsMesure.push(TagsMesure[i].nom);
+        tagsMesure.push(parseInt(TagsMesure[i].nom));
       }
     }
     await TrieTags(tags, tagsMesure);
@@ -346,6 +349,45 @@ function ProductList() {
                 onClick={(e) => HandleCheck(e.target, 2)}
               />
               <label htmlFor="Accéssoire" style={{ visibility: "hidden" }}>
+                <span></span>
+              </label>
+            </div>
+            <div className="switch-container">
+              <input
+                type="checkbox"
+                id="Poids"
+                name="Poids"
+                className="slideThree"
+                checked={TagsMesure[0].active}
+                onClick={(e) => HandleCheckMesure(e.target, 0)}
+              />
+              <label htmlFor="Poids" style={{ visibility: "hidden" }}>
+                <span></span>
+              </label>
+            </div>
+            <div className="switch-container">
+              <input
+                type="checkbox"
+                id="Boite"
+                name="Boite"
+                className="slideThree"
+                checked={TagsMesure[2].active}
+                onClick={(e) => HandleCheckMesure(e.target, 2)}
+              />
+              <label htmlFor="Boite" style={{ visibility: "hidden" }}>
+                <span></span>
+              </label>
+            </div>
+            <div className="switch-container">
+              <input
+                type="checkbox"
+                id="Unite"
+                name="Unite"
+                className="slideThree"
+                checked={TagsMesure[1].active}
+                onClick={(e) => HandleCheckMesure(e.target, 1)}
+              />
+              <label htmlFor="Unite" style={{ visibility: "hidden" }}>
                 <span></span>
               </label>
             </div>
