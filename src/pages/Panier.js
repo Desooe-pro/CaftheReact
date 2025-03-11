@@ -5,7 +5,7 @@ import axios from "axios";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
-function Panier(props) {
+function Panier() {
   const { isAuthenticated } = useContext(AuthContext);
   const navigate = useNavigate();
   const [panier, setPanier] = useState({});

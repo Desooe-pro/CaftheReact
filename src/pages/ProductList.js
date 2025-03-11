@@ -7,7 +7,6 @@ import "react-loading-skeleton/dist/skeleton.css";
 import "../styles/Liste.css";
 import "../styles/Checkbox.css";
 import Liste from "../Components/Liste";
-import login from "./Login";
 axios.defaults.headers.common["Authorization"] =
   `Bearer ${localStorage.getItem("token")}`;
 
