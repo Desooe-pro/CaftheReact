@@ -10,7 +10,7 @@ function AddToCart(id) {
   const user = JSON.parse(localStorage.getItem("user"));
 
   const fetchLignes = async () => {
-    if (user.nom) {
+    if (user) {
       try {
         const response = await axios.get(
           `${process.env.REACT_APP_API_URL}/api/paniers/client/open/${user.id}`,
