@@ -65,10 +65,16 @@ function ProductList() {
     const The = document.getElementById("Thé");
     const Cafe = document.getElementById("Café");
     const Accessoire = document.getElementById("Accéssoire");
+    const Poids = document.getElementById("Poids");
+    const Boite = document.getElementById("Boite");
+    const Unite = document.getElementById("Unite");
     e.value = "";
     The.checked = false;
     Cafe.checked = false;
     Accessoire.checked = false;
+    Poids.checked = false;
+    Boite.checked = false;
+    Unite.checked = false;
     let lstTemp = [The, Cafe, Accessoire];
     for (let i = 0; i < Tags.length; i++) {
       HandleCheck(lstTemp[i], i);
