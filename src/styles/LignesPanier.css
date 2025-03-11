@@ -7,7 +7,7 @@
 #Ligne {
     display: flex;
     justify-content: space-between;
-    width: 80%;
+    width: 100%;
     background: linear-gradient(90deg, #f6b669, #f3c186);
     border: 1px solid black;
     border-radius: 10px;
@@ -26,6 +26,7 @@
     border-radius: 10px;
     padding: 0 5px;
     width: 15%;
+    min-width: 136px;
 }
 
 .btnNBUp, .btnNBDown {
@@ -45,4 +46,35 @@
 
 .btnNBDown, .btnNBUp:hover {
     background: linear-gradient(#8f7d5e, #efe9e6);
+}
+
+.formLignePanier {
+    color: #000;
+    margin: auto;
+    padding: 10px;
+    display: inline-block;
+    vertical-align: middle;
+    white-space: normal;
+    background: none;
+    line-height: 1;
+    height: fit-content;
+
+    /* Browsers have different default form fonts */
+    font-size: 13px;
+    font-family: Arial, sans-serif;
+}
+
+.SupBTN {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px 10px;
+    border-radius: 15px;
+    background: linear-gradient(120deg, #880000, #dd0000);
+    color: #ffffff;
+    font-size: 2.5em;
+}
+
+.SupBTN:hover {
+    background: linear-gradient(120deg, #dd0000, #880000);
 }

@@ -37,7 +37,6 @@ function Panier() {
         ) : (
           ""
         )}
-        <LignesPanier Id_Panier={panier.Id_Panier} />
       </div>
       <div className="HistoriquePanier"></div>
     </div>
