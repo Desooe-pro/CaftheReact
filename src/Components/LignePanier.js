@@ -67,6 +67,22 @@ function LignePanier({ ligne, Id }) {
     }
   };
 
+  const SupProduit = async () => {
+    if (ligne.Id_Panier) {
+      try {
+        await axios.post(
+          `${process.env.REACT_APP_API_URL}/api/lignedepanier/supr`,
+          {
+            Id_Panier: ligne.Id_Panier,
+            Id_Article: ligne.Id_Article,
+          },
+        );
+      } catch (error) {
+        console.error("Erreur de chargement des produits ", error);
+      }
+    }
+  };
+
   const HandleAdd = () => {
     void addProduit();
     navigate("/reload/panier");
@@ -79,8 +95,12 @@ function LignePanier({ ligne, Id }) {
 
   const HandleForm = (e) => {
     e.preventDefault();
-    console.log(e);
     void nbProduit(e);
+    navigate("/reload/panier");
+  };
+
+  const HandleSup = () => {
+    void SupProduit();
     navigate("/reload/panier");
   };
 
@@ -115,7 +135,7 @@ function LignePanier({ ligne, Id }) {
           </p>
         </div>
       </div>
-      <button style={{ width: "10%" }} className="SupBTN">
+      <button style={{ width: "10%" }} className="SupBTN" onClick={HandleSup}>
         🗑
       </button>
     </div>
