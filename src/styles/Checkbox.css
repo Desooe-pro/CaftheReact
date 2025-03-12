@@ -68,6 +68,10 @@ input[type=checkbox].slideThree + label span:before {
     z-index: 1;
 }
 
+input[type=checkbox][id="Thé"].slideThree + label span:before {
+    background: linear-gradient(#fcfff4 0%, #dfe5d7 40%, #596B47 100%);
+}
+
 input[type=checkbox][id="Thé"].slideThree:checked + label:before {
     background: #596B47;
 }
@@ -76,12 +80,20 @@ input[type=checkbox][id="Thé"].slideThree + label span:before {
     content: 'Thé';
 }
 
+input[type=checkbox][id="Café"].slideThree + label span:before {
+    background: linear-gradient(#fcfff4 0%, #dfe5d7 40%, #584839 100%);
+}
+
 input[type=checkbox][id="Café"].slideThree:checked + label:before {
     background: #372111;
 }
 
 input[type=checkbox][id="Café"].slideThree + label span:before {
     content: 'Café';
+}
+
+input[type=checkbox][id="Accéssoire"].slideThree + label span:before {
+    background: linear-gradient(#fcfff4 0%, #dfe5d7 40%, #575757 100%);
 }
 
 input[type=checkbox][id="Accéssoire"].slideThree:checked + label:before {

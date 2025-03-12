@@ -24,7 +24,6 @@ function LignesPanier({ Id_Panier }) {
 
   return (
     <div id="Lignes">
-      <h2 style={{ textAlign: "center" }}>Votre panier</h2>
       {lignes
         ? lignes.map((ligne) => (
             <LignePanier ligne={ligne} Id={lignes.indexOf(ligne)} />

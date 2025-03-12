@@ -59,10 +59,13 @@ function LignePanier({ ligne, Id }) {
           },
         );
       } catch (error) {
-        console.error("Erreur de chargement des produits ", error);
-        alert(
-          "Vous essayez de mettre plus d'articles dans votre panier qu'il n'y en a en stock",
-        );
+        if (error.status === 300) {
+          alert(
+            "Vous essayez de mettre plus d'articles dans votre panier qu'il n'y en a en stock",
+          );
+        } else {
+          console.error("Erreur de chargement des produits ", error);
+        }
       }
     }
   };

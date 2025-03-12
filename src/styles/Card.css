@@ -138,6 +138,11 @@ ul {
         grid-template-columns: repeat(1, 300px);
     }
 
+    .ImgDetails {
+        height: 150px;
+        width: 150px;
+    }
+
     .principal {
         flex-wrap: wrap;
         margin: 0;

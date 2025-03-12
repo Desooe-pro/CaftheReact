@@ -32,10 +32,13 @@ function Panier() {
   return (
     <div style={{ display: "flex", flexDirection: "row" }}>
       <div className="PanierPanier">
+        <h2 style={{ textAlign: "center" }}>Votre panier</h2>
         {panier.Id_Panier && panier.Nombre_de_lignes_Panier !== 0 ? (
           <LignesPanier Id_Panier={panier.Id_Panier} />
         ) : (
-          ""
+          <h3 style={{ textAlign: "center" }}>
+            Votre panier est actuellement vide
+          </h3>
         )}
       </div>
       <div className="HistoriquePanier"></div>

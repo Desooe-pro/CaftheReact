@@ -99,7 +99,6 @@ function ProductDetails() {
             className={`product-card product-card-${produits.tag}`}
             style={{
               width: "95%",
-              minHeight: "600px",
               marginBottom: "5px",
               height: "fit-content",
             }}
@@ -141,12 +140,12 @@ function ProductDetails() {
                   {produits.lienImg === null ? (
                     <Skeleton
                       style={{ borderRadius: "10px" }}
-                      height={450}
-                      width={450}
+                      className="ImgDetails"
                     />
                   ) : (
                     <img
                       style={{ borderRadius: "10px" }}
+                      className="ImgDetails"
                       src={`/img/450/450${produits.lienImg}`}
                       alt=""
                     />
