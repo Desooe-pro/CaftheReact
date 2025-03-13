@@ -26,6 +26,8 @@ function ProductList() {
     { nom: "2", active: false },
     { nom: "3", active: false },
   ]);
+  const [TriePrix, setTriePrix] = useState(false);
+  const [TrieAlpha, setTrieAlpha] = useState(false);
 
   function HandlePrecedent() {
     if (affiche >= 18) {
@@ -75,11 +77,35 @@ function ProductList() {
     Poids.checked = false;
     Boite.checked = false;
     Unite.checked = false;
+    setTriePrix(false);
+    setTrieAlpha(false);
     let lstTemp = [The, Cafe, Accessoire];
     for (let i = 0; i < Tags.length; i++) {
       HandleCheck(lstTemp[i], i);
     }
     HandleCheckMesure(Poids, 0);
+  }
+
+  function HandleTriePrix() {
+    setTrieAlpha(false);
+    if (TriePrix === "decrois") {
+      setTriePrix(false);
+    } else if (TriePrix === "crois") {
+      setTriePrix("decrois");
+    } else {
+      setTriePrix("crois");
+    }
+  }
+
+  function HandleTrieAlpha() {
+    setTriePrix(false);
+    if (TrieAlpha === "inv") {
+      setTrieAlpha(false);
+    } else if (TrieAlpha === "norm") {
+      setTrieAlpha("inv");
+    } else {
+      setTrieAlpha("norm");
+    }
   }
 
   const TrieTags = (tags, tagsMesure) => {
@@ -96,6 +122,9 @@ function ProductList() {
         (produit) =>
           produit.Designation_Article.includes(texteTrie) ||
           produit.Designation_Article.toLowerCase().includes(texteTrie) ||
+          produit.Designation_Article.toLowerCase().includes(
+            texteTrie.toLowerCase(),
+          ) ||
           produit.Designation_Article.normalize("NFD")
             .replace(/[\u0300-\u036f]/g, "")
             .includes(texteTrie) ||
@@ -104,6 +133,29 @@ function ProductList() {
             .toLowerCase()
             .includes(texteTrie),
       );
+    }
+    if (TriePrix === "decrois") {
+      produit.sort(
+        (a, b) =>
+          parseFloat(b.Prix_unitaire_Article) -
+          parseFloat(a.Prix_unitaire_Article),
+      );
+    } else if (TriePrix === "crois") {
+      produit.sort(
+        (a, b) =>
+          parseFloat(a.Prix_unitaire_Article) -
+          parseFloat(b.Prix_unitaire_Article),
+      );
+    } else if (TrieAlpha === "norm") {
+      produit.sort((a, b) =>
+        collator.compare(a.Designation_Article, b.Designation_Article),
+      );
+    } else if (TrieAlpha === "inv") {
+      produit.sort((a, b) =>
+        collator.compare(b.Designation_Article, a.Designation_Article),
+      );
+    } else {
+      produit.sort((a, b) => collator.compare(b.tag, a.tag));
     }
   };
 
@@ -319,87 +371,101 @@ function ProductList() {
         className="principal"
         style={{ display: "flex", flexDirection: "row" }}
       >
-        <div className="cate">
-          <fieldset className="FieldTags">
-            <legend>
-              Sélectionnez les catégories que vous souhaitez garder :
-            </legend>
-            <div className="switch-container">
-              <input
-                type="checkbox"
-                id="Thé"
-                name="Thé"
-                className="slideThree"
-                onClick={(e) => HandleCheck(e.target, 0)}
-              />
-              <label htmlFor="Thé" style={{ visibility: "hidden" }}>
-                <span></span>
-              </label>
-            </div>
-            <div className="switch-container">
-              <input
-                type="checkbox"
-                id="Café"
-                name="Café"
-                className="slideThree"
-                onClick={(e) => HandleCheck(e.target, 1)}
-              />
-              <label htmlFor="Café" style={{ visibility: "hidden" }}>
-                <span></span>
-              </label>
-            </div>
-            <div className="switch-container">
-              <input
-                type="checkbox"
-                id="Accéssoire"
-                name="Accéssoire"
-                className="slideThree"
-                onClick={(e) => HandleCheck(e.target, 2)}
-              />
-              <label htmlFor="Accéssoire" style={{ visibility: "hidden" }}>
-                <span></span>
-              </label>
-            </div>
-            <div className="switch-container">
-              <input
-                type="checkbox"
-                id="Poids"
-                name="Poids"
-                className="slideThree"
-                checked={TagsMesure[0].active}
-                onClick={(e) => HandleCheckMesure(e.target, 0)}
-              />
-              <label htmlFor="Poids" style={{ visibility: "hidden" }}>
-                <span></span>
-              </label>
-            </div>
-            <div className="switch-container">
-              <input
-                type="checkbox"
-                id="Boite"
-                name="Boite"
-                className="slideThree"
-                checked={TagsMesure[2].active}
-                onClick={(e) => HandleCheckMesure(e.target, 2)}
-              />
-              <label htmlFor="Boite" style={{ visibility: "hidden" }}>
-                <span></span>
-              </label>
-            </div>
-            <div className="switch-container">
-              <input
-                type="checkbox"
-                id="Unite"
-                name="Unite"
-                className="slideThree"
-                checked={TagsMesure[1].active}
-                onClick={(e) => HandleCheckMesure(e.target, 1)}
-              />
-              <label htmlFor="Unite" style={{ visibility: "hidden" }}>
-                <span></span>
-              </label>
-            </div>
-          </fieldset>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "5px",
+            height: "fit-content",
+          }}
+        >
+          <div className="cate">
+            <fieldset className="FieldTags">
+              <legend>
+                Sélectionnez les catégories que vous souhaitez garder :
+              </legend>
+              <div className="switch-container">
+                <input
+                  type="checkbox"
+                  id="Thé"
+                  name="Thé"
+                  className="slideThree"
+                  onClick={(e) => HandleCheck(e.target, 0)}
+                />
+                <label htmlFor="Thé" style={{ visibility: "hidden" }}>
+                  <span></span>
+                </label>
+              </div>
+              <div className="switch-container">
+                <input
+                  type="checkbox"
+                  id="Café"
+                  name="Café"
+                  className="slideThree"
+                  onClick={(e) => HandleCheck(e.target, 1)}
+                />
+                <label htmlFor="Café" style={{ visibility: "hidden" }}>
+                  <span></span>
+                </label>
+              </div>
+              <div className="switch-container">
+                <input
+                  type="checkbox"
+                  id="Accéssoire"
+                  name="Accéssoire"
+                  className="slideThree"
+                  onClick={(e) => HandleCheck(e.target, 2)}
+                />
+                <label htmlFor="Accéssoire" style={{ visibility: "hidden" }}>
+                  <span></span>
+                </label>
+              </div>
+            </fieldset>
+          </div>
+          <div className="cate">
+            <fieldset className="FieldTags">
+              <legend>Sélectionnez le tri que vous souhaitez garder :</legend>
+              <div className="switch-container">
+                <input
+                  type="checkbox"
+                  id="Poids"
+                  name="Poids"
+                  className="slideThree"
+                  checked={TagsMesure[0].active}
+                  onClick={(e) => HandleCheckMesure(e.target, 0)}
+                />
+                <label htmlFor="Poids" style={{ visibility: "hidden" }}>
+                  <span></span>
+                </label>
+              </div>
+              <div className="switch-container">
+                <input
+                  type="checkbox"
+                  id="Boite"
+                  name="Boite"
+                  className="slideThree"
+                  checked={TagsMesure[2].active}
+                  onClick={(e) => HandleCheckMesure(e.target, 2)}
+                />
+                <label htmlFor="Boite" style={{ visibility: "hidden" }}>
+                  <span></span>
+                </label>
+              </div>
+              <div className="switch-container">
+                <input
+                  type="checkbox"
+                  id="Unite"
+                  name="Unite"
+                  className="slideThree"
+                  checked={TagsMesure[1].active}
+                  onClick={(e) => HandleCheckMesure(e.target, 1)}
+                />
+                <label htmlFor="Unite" style={{ visibility: "hidden" }}>
+                  <span></span>
+                </label>
+              </div>
+            </fieldset>
+          </div>
         </div>
         <div>
           <div className="recherche-reset">
@@ -420,6 +486,112 @@ function ProductList() {
               <button id="Reset" onClick={(e) => HandleReset(e)}>
                 Reset
               </button>
+            </form>
+            <form action="#" method="post" onSubmit={(e) => e.preventDefault()}>
+              {TriePrix === "crois" ? (
+                <button style={{ margin: "0 5px" }} onClick={HandleTriePrix}>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      alignItems: "center",
+                      gap: "5px",
+                    }}
+                  >
+                    <div style={{ display: "flex", flexDirection: "column" }}>
+                      <span className="PrixOn">▲</span>
+                      <span className="PrixOff">▼</span>
+                    </div>
+                    Prix
+                  </div>
+                </button>
+              ) : TriePrix === "decrois" ? (
+                <button style={{ margin: "0 5px" }} onClick={HandleTriePrix}>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      alignItems: "center",
+                      gap: "5px",
+                    }}
+                  >
+                    <div style={{ display: "flex", flexDirection: "column" }}>
+                      <span className="PrixOff">▲</span>
+                      <span className="PrixOn">▼</span>
+                    </div>
+                    Prix
+                  </div>
+                </button>
+              ) : (
+                <button style={{ margin: "0 5px" }} onClick={HandleTriePrix}>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      alignItems: "center",
+                      gap: "5px",
+                    }}
+                  >
+                    <div style={{ display: "flex", flexDirection: "column" }}>
+                      <span className="PrixOff">▲</span>
+                      <span className="PrixOff">▼</span>
+                    </div>
+                    Prix
+                  </div>
+                </button>
+              )}
+              {TrieAlpha === "norm" ? (
+                <button style={{ margin: "0 5px" }} onClick={HandleTrieAlpha}>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      alignItems: "center",
+                      gap: "5px",
+                    }}
+                  >
+                    <div style={{ display: "flex", flexDirection: "column" }}>
+                      <span className="PrixOn">▲</span>
+                      <span className="PrixOff">▼</span>
+                    </div>
+                    Alphabet
+                  </div>
+                </button>
+              ) : TrieAlpha === "inv" ? (
+                <button style={{ margin: "0 5px" }} onClick={HandleTrieAlpha}>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      alignItems: "center",
+                      gap: "5px",
+                    }}
+                  >
+                    <div style={{ display: "flex", flexDirection: "column" }}>
+                      <span className="PrixOff">▲</span>
+                      <span className="PrixOn">▼</span>
+                    </div>
+                    Alphabet
+                  </div>
+                </button>
+              ) : (
+                <button style={{ margin: "0 5px" }} onClick={HandleTrieAlpha}>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      alignItems: "center",
+                      gap: "5px",
+                    }}
+                  >
+                    <div style={{ display: "flex", flexDirection: "column" }}>
+                      <span className="PrixOff">▲</span>
+                      <span className="PrixOff">▼</span>
+                    </div>
+                    Alphabet
+                  </div>
+                </button>
+              )}
             </form>
           </div>
           <div className="Liste">

@@ -69,6 +69,15 @@
 .recherche-reset {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
+}
+
+.PrixOn {
+    color: #000000;
+}
+
+.PrixOff {
+    color: #00000088;
 }
 
 @media screen and (max-width: 1100px) {
