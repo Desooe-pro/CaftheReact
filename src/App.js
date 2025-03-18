@@ -11,6 +11,7 @@ import Panier from "./pages/Panier";
 import Compte from "./pages/Compte";
 import Reload from "./pages/Reload";
 import Test from "./Components/test";
+import Commande from "./pages/Commande";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <Route path="btntest" element={<BtnTest />} />
             <Route path="compte" element={<Compte />} />
             <Route path="panier" element={<Panier />} />
+            <Route path="commande/:Id_Panier" element={<Commande />} />
             <Route path="reload/:link" element={<Reload />} />
             <Route path="test" element={<Test />} />
             {/*Gestion des pages non trouvées*/}

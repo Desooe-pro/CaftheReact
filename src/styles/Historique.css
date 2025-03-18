@@ -1,0 +1,23 @@
+.MenuDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 10;
+}
+
+.Menu {
+    width: 90%;
+    background: lightgrey;
+    border: 1px solid black;
+    margin: 0 auto 5px;
+}
+
+.HistDeroule, .HistFlat {
+    width: 90%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.HistFlat {
+    height: 0;
+}

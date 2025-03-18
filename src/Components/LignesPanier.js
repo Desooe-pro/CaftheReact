@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import LignePanier from "./LignePanier";
 import "../styles/LignesPanier.css";
+import AnnulationCommande from "./AnnulationCommande";
 
-function LignesPanier({ Id_Panier }) {
+function LignesPanier({ Id_Panier, status }) {
   const [lignes, setLignes] = useState([]);
 
   useEffect(() => {
@@ -26,9 +27,16 @@ function LignesPanier({ Id_Panier }) {
     <div id="Lignes">
       {lignes
         ? lignes.map((ligne) => (
-            <LignePanier ligne={ligne} Id={lignes.indexOf(ligne)} />
+            <LignePanier ligne={ligne} Id={Id_Panier} status={status} />
           ))
         : ""}
+      {status === "commanded" ? (
+        <div style={{ width: "90%" }}>
+          <AnnulationCommande id={Id_Panier} />
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 }

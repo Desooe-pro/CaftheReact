@@ -1,13 +1,31 @@
 .PanierPanier {
     width: 60%;
-    height: 90vh;
+    min-height: 90vh;
     box-sizing: border-box;
     border: 1px solid black;
 }
 
 .HistoriquePanier {
     width: 40%;
-    height: 90vh;
+    min-height: 90vh;
     box-sizing: border-box;
     border: 1px solid black;
+    text-align: center;
+}
+
+.detailsPrix, .Prix {
+    font-size: 14px;
+    background: lightgrey;
+    box-sizing: border-box;
+    border: 1px solid black;
+    padding: 5px;
+}
+
+.btnP {
+    height: 40px;
+    background: linear-gradient(90deg, #f6b669, #f3c186);
+}
+
+.btnP:hover {
+    background: linear-gradient(-90deg, #f6b669, #f3c186);
 }

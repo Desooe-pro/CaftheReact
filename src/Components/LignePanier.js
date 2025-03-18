@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import AnnulationCommande from "./AnnulationCommande";
 
-function LignePanier({ ligne, Id }) {
+function LignePanier({ ligne, Id, status }) {
   const [produit, setProduit] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
@@ -108,39 +109,65 @@ function LignePanier({ ligne, Id }) {
   };
 
   return (
-    <div style={{ display: "flex", width: "90%" }}>
-      <div style={{ width: "10%" }}></div>
-      <div id="Ligne">
-        <div style={{ width: "30%" }}>
-          <p>{produit.Designation_Article}</p>
-        </div>
-        <div className="nb">
-          <button className={"btnNBDown"} onClick={HandleSub}>
-            ▼
+    <div style={{ width: "100%" }}>
+      {status === "ouvert" ? (
+        <div style={{ display: "flex", width: "90%" }}>
+          <div style={{ width: "10%" }}></div>
+          <div id="Ligne">
+            <div style={{ width: "30%" }}>
+              <p>{produit.Designation_Article}</p>
+            </div>
+            <div className="nb">
+              <button className={"btnNBDown"} onClick={HandleSub}>
+                ▼
+              </button>
+              <form method="post" onSubmit={(e) => HandleForm(e)}>
+                <input
+                  className="formLignePanier"
+                  type={"text"}
+                  defaultValue={`${ligne.Quantite_Ligne_de_panier}`}
+                  style={{ width: "100%", textAlign: "center" }}
+                />
+              </form>
+              <button className={"btnNBUp"} onClick={HandleAdd}>
+                ▲
+              </button>
+            </div>
+            <div style={{ width: "15%", textAlign: "end" }}>
+              <p>
+                {(
+                  produit.Prix_unitaire_Article * ligne.Quantite_Ligne_de_panier
+                ).toFixed(2)}{" "}
+                €
+              </p>
+            </div>
+          </div>
+          <button
+            style={{ width: "10%" }}
+            className="SupBTN"
+            onClick={HandleSup}
+          >
+            🗑
           </button>
-          <form method="post" onSubmit={(e) => HandleForm(e)}>
-            <input
-              className="formLignePanier"
-              type={"text"}
-              defaultValue={`${ligne.Quantite_Ligne_de_panier}`}
-              style={{ width: "100%", textAlign: "center" }}
-            />
-          </form>
-          <button className={"btnNBUp"} onClick={HandleAdd}>
-            ▲
-          </button>
         </div>
-        <div style={{ width: "15%", textAlign: "end" }}>
-          <p>
-            {(
-              produit.Prix_unitaire_Article * ligne.Quantite_Ligne_de_panier
-            ).toFixed(2)}
-          </p>
+      ) : (
+        <div style={{ display: "flex", width: "100%" }}>
+          <div className="LigneHistorique">
+            <div style={{ width: "30%" }}>
+              <p>{produit.Designation_Article}</p>
+            </div>
+            <div className="nb">{ligne.Quantite_Ligne_de_panier}</div>
+            <div style={{ width: "15%", textAlign: "end" }}>
+              <p>
+                {(
+                  produit.Prix_unitaire_Article * ligne.Quantite_Ligne_de_panier
+                ).toFixed(2)}{" "}
+                €
+              </p>
+            </div>
+          </div>
         </div>
-      </div>
-      <button style={{ width: "10%" }} className="SupBTN" onClick={HandleSup}>
-        🗑
-      </button>
+      )}
     </div>
   );
 }

@@ -4,7 +4,7 @@
     align-items: center;
 }
 
-#Ligne {
+#Ligne, .LigneHistorique {
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -13,6 +13,11 @@
     border-radius: 10px;
     padding: 0 10px;
     margin: 5px 0;
+}
+
+.LigneHistorique {
+    width: 90%;
+    margin: 5px auto;
 }
 
 .nb {

@@ -43,6 +43,18 @@ function ProductList() {
 
   function HandleCheck(e, id) {
     let temp = [...Tags];
+    if (id === 2) {
+      const Poids = document.getElementById("Poids");
+      const Boite = document.getElementById("Boite");
+      Poids.checked = false;
+      Boite.checked = false;
+      TagsMesure[0].active = false;
+      TagsMesure[2].active = false;
+    } else {
+      const Unite = document.getElementById("Unite");
+      Unite.checked = false;
+      TagsMesure[1].active = false;
+    }
     temp[id].active = e.checked;
     setAffiche(9);
     setTags(temp);
@@ -51,9 +63,22 @@ function ProductList() {
   function HandleCheckMesure(e, id) {
     let temp = [...TagsMesure];
     temp.forEach((el) => (el.active = false));
+    if (id === 1) {
+      const The = document.getElementById("Thé");
+      const Cafe = document.getElementById("Café");
+      The.checked = false;
+      Cafe.checked = false;
+      Tags[0].active = false;
+      Tags[1].active = false;
+    } else {
+      const Accessoire = document.getElementById("Accéssoire");
+      Accessoire.checked = false;
+      Tags[2].active = false;
+    }
     temp[id].active = e.checked;
     setAffiche(9);
     setTagsMesure(temp);
+    void launch();
   }
 
   function HandleTexte(e) {
