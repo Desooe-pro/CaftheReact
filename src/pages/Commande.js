@@ -66,8 +66,8 @@ function Commande() {
           Code_Postale: e.target[3].value,
           Id_Panier: Id_Panier,
           Identifiant_Client: user.id,
-          adresse: adresse.Id_Adresse,
-          CB: CB.Id_CB,
+          adresse: adresse[0].Id_Adresse,
+          CB: CB[0].Id_CB,
           nbLignes: panier.Nombre_de_lignes_Panier,
         },
       );
@@ -123,28 +123,28 @@ function Commande() {
                 <input
                   type={"text"}
                   placeholder={"Veuillez entrer votre numéro d'adresse"}
-                  value={adresse ? adresse.Numero_Voie : ""}
+                  value={adresse ? adresse[0].Numero_Voie : ""}
                   required
                   className="formLigne formLigneAdresse"
                 />
                 <input
                   type={"text"}
                   placeholder={"Veuillez entrer votre nom de rue"}
-                  value={adresse ? adresse.Nom_Type_Voie : ""}
+                  value={adresse ? adresse[0].Nom_Type_Voie : ""}
                   required
                   className="formLigne formLigneAdresse"
                 />
                 <input
                   type={"text"}
                   placeholder={"Veuillez entrer votre ville"}
-                  value={adresse ? adresse.Nom_commune_Adresse : ""}
+                  value={adresse ? adresse[0].Nom_commune_Adresse : ""}
                   required
                   className="formLigne formLigneAdresse"
                 />
                 <input
                   type={"text"}
                   placeholder={"Veuillez entrer votre code postal"}
-                  value={adresse ? adresse.Code_postal_Voie : ""}
+                  value={adresse ? adresse[0].Code_postal_Voie : ""}
                   required
                   className="formLigne formLigneAdresse"
                 />
@@ -158,7 +158,7 @@ function Commande() {
                   <select
                     required
                     className="formLigne formLigneAdresse"
-                    value={CB ? CB.Type_CB : "Visa"}
+                    value={CB ? CB[0].Type_CB : "Visa"}
                     style={{ width: "50%" }}
                   >
                     <option value="Visa">Visa</option>
@@ -169,7 +169,7 @@ function Commande() {
                     pattern="(0[0-1]|1[0-2])\/[0-9]{2}"
                     maxLength="5"
                     placeholder="MM/AA"
-                    value={CB ? CB.Date_expiration_CB : ""}
+                    value={CB ? CB[0].Date_expiration_CB : ""}
                     required
                     className="formLigne formLigneAdresse"
                     onKeyUp={(e) => {
@@ -185,14 +185,14 @@ function Commande() {
                 </div>
                 <input
                   type={"text"}
-                  value={CB ? CB.Numero_CB : ""}
+                  value={CB ? CB[0].Numero_CB : ""}
                   required
                   placeholder="Veuillez entrer votre numéro de carte bancaire"
                   className="formLigne formLigneAdresse"
                 />
                 <input
                   type={"text"}
-                  value={CB ? CB.Nom_CB : ""}
+                  value={CB ? CB[0].Nom_CB : ""}
                   required
                   placeholder="Veuillez entrer le nom inscrit sur votre carte"
                   className="formLigne formLigneAdresse"
