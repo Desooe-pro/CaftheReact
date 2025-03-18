@@ -14,6 +14,8 @@ function Commande() {
   const [CBSubmit, setCBSubmit] = useState(false);
   const user = JSON.parse(localStorage.getItem("user"));
 
+  console.log(CB);
+
   useEffect(() => {
     if (!isAuthenticated) {
       navigate("/");
