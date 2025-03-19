@@ -340,9 +340,9 @@ function ProductList() {
             </div>
             <div className="Liste">
               <div className="container">
-                {Array.from({ length: 9 }).map((_, i) => (
+                {Array.from({ length: 9 }).map((_, id) => (
                   <div>
-                    <div key={i} className="product-skeleton">
+                    <div key={id} className="product-skeleton">
                       <div>
                         <Skeleton height={150} width={150} />
                         <div style={{ marginTop: "10px" }}>
@@ -456,7 +456,7 @@ function ProductList() {
                   id="Poids"
                   name="Poids"
                   className="slideThree"
-                  checked={TagsMesure[0].active}
+                  defaultChecked={TagsMesure[0].active}
                   onClick={(e) => HandleCheckMesure(e.target, 0)}
                 />
                 <label htmlFor="Poids" style={{ visibility: "hidden" }}>
@@ -469,7 +469,7 @@ function ProductList() {
                   id="Boite"
                   name="Boite"
                   className="slideThree"
-                  checked={TagsMesure[2].active}
+                  defaultChecked={TagsMesure[2].active}
                   onClick={(e) => HandleCheckMesure(e.target, 2)}
                 />
                 <label htmlFor="Boite" style={{ visibility: "hidden" }}>
@@ -482,7 +482,7 @@ function ProductList() {
                   id="Unite"
                   name="Unite"
                   className="slideThree"
-                  checked={TagsMesure[1].active}
+                  defaultChecked={TagsMesure[1].active}
                   onClick={(e) => HandleCheckMesure(e.target, 1)}
                 />
                 <label htmlFor="Unite" style={{ visibility: "hidden" }}>

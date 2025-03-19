@@ -26,8 +26,10 @@ function LignesPanier({ Id_Panier, status }) {
   return (
     <div id="Lignes">
       {lignes
-        ? lignes.map((ligne) => (
-            <LignePanier ligne={ligne} Id={Id_Panier} status={status} />
+        ? lignes.map((ligne, id) => (
+            <div key={id} style={{ width: "100%" }}>
+              <LignePanier ligne={ligne} Id={Id_Panier} status={status} />
+            </div>
           ))
         : ""}
       {status === "commanded" ? (

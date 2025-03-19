@@ -12,7 +12,9 @@ function Commande() {
   const [panier, setPanier] = useState({});
   const [CB, setCB] = useState(false);
   const [CBSubmit, setCBSubmit] = useState(false);
+  const [reglementBoutique, setReglementBoutique] = useState(false);
   const user = JSON.parse(localStorage.getItem("user"));
+  const adresseLoc = JSON.parse(localStorage.getItem("adresse"));
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -23,9 +25,12 @@ function Commande() {
   const HandleForm = (e) => {
     e.preventDefault();
     if (!CBSubmit) {
-      void registerCB(e);
+      if (!CB) {
+        void registerCB(e);
+      }
       void fetchCB();
       setCBSubmit(true);
+      setReglementBoutique("CB");
     } else {
       void registerCommande(e);
     }
@@ -39,6 +44,12 @@ function Commande() {
   const HandleCB = () => {
     void fetchCB();
     console.log(CB);
+  };
+
+  const HandleReglement = () => {
+    setReglementBoutique("Boutique");
+    setCB(null);
+    setCBSubmit(true);
   };
 
   useEffect(() => {
@@ -56,24 +67,46 @@ function Commande() {
   });
 
   const registerCommande = async (e) => {
-    try {
-      await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/commande/register`,
-        {
-          Numero_de_voie: e.target[0].value,
-          Adresse: e.target[1].value,
-          Ville: e.target[2].value,
-          Code_Postale: e.target[3].value,
-          Id_Panier: Id_Panier,
-          Identifiant_Client: user.id,
-          adresse: adresse.Id_Adresse,
-          CB: CB.Id_CB,
-          nbLignes: panier.Nombre_de_lignes_Panier,
-        },
-      );
-      navigate("/");
-    } catch (error) {
-      console.error(error);
+    console.log(e.target[1]);
+    console.log(e);
+    if (e.target[1] !== undefined) {
+      console.log("Passe");
+      try {
+        await axios.post(
+          `${process.env.REACT_APP_API_URL}/api/commande/register`,
+          {
+            Numero_de_voie: e.target[0].value,
+            Adresse: e.target[1].value,
+            Ville: e.target[2].value,
+            Code_Postale: e.target[3].value,
+            Id_Panier: Id_Panier,
+            Identifiant_Client: user.id,
+            adresse: adresse[0].Id_Adresse,
+            type: reglementBoutique,
+            CB: CB[0].Id_CB,
+            nbLignes: panier.Nombre_de_lignes_Panier,
+          },
+        );
+        navigate("/");
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      console.log(adresse);
+      try {
+        await axios.post(
+          `${process.env.REACT_APP_API_URL}/api/commande/boutique/register`,
+          {
+            Id_Panier: Id_Panier,
+            Identifiant_Client: user.id,
+            adresse: adresseLoc.id,
+            nbLignes: panier.Nombre_de_lignes_Panier,
+          },
+        );
+        navigate("/");
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
 
@@ -115,41 +148,45 @@ function Commande() {
       <div style={{ width: "40%" }}>
         <form onSubmit={(e) => HandleForm(e)}>
           {CBSubmit ? (
-            <div>
-              <label>
-                <p style={{ paddingLeft: "10%", marginBottom: "21px" }}>
-                  Veuillez entrer l'adresse de livraison :
-                </p>
-                <input
-                  type={"text"}
-                  placeholder={"Veuillez entrer votre numéro d'adresse"}
-                  value={adresse ? adresse.Numero_Voie : ""}
-                  required
-                  className="formLigne formLigneAdresse"
-                />
-                <input
-                  type={"text"}
-                  placeholder={"Veuillez entrer votre nom de rue"}
-                  value={adresse ? adresse.Nom_Type_Voie : ""}
-                  required
-                  className="formLigne formLigneAdresse"
-                />
-                <input
-                  type={"text"}
-                  placeholder={"Veuillez entrer votre ville"}
-                  value={adresse ? adresse.Nom_commune_Adresse : ""}
-                  required
-                  className="formLigne formLigneAdresse"
-                />
-                <input
-                  type={"text"}
-                  placeholder={"Veuillez entrer votre code postal"}
-                  value={adresse ? adresse.Code_postal_Voie : ""}
-                  required
-                  className="formLigne formLigneAdresse"
-                />
-              </label>
-            </div>
+            reglementBoutique === "CB" ? (
+              <div>
+                <label>
+                  <p style={{ paddingLeft: "10%", marginBottom: "21px" }}>
+                    Veuillez entrer l'adresse de livraison :
+                  </p>
+                  <input
+                    type={"text"}
+                    placeholder={"Veuillez entrer votre numéro d'adresse"}
+                    defaultValue={adresse ? adresse[0].Numero_Voie : ""}
+                    required
+                    className="formLigne formLigneAdresse"
+                  />
+                  <input
+                    type={"text"}
+                    placeholder={"Veuillez entrer votre nom de rue"}
+                    defaultValue={adresse ? adresse[0].Nom_Type_Voie : ""}
+                    required
+                    className="formLigne formLigneAdresse"
+                  />
+                  <input
+                    type={"text"}
+                    placeholder={"Veuillez entrer votre ville"}
+                    defaultValue={adresse ? adresse[0].Nom_commune_Adresse : ""}
+                    required
+                    className="formLigne formLigneAdresse"
+                  />
+                  <input
+                    type={"text"}
+                    placeholder={"Veuillez entrer votre code postal"}
+                    defaultValue={adresse ? adresse[0].Code_postal_Voie : ""}
+                    required
+                    className="formLigne formLigneAdresse"
+                  />
+                </label>
+              </div>
+            ) : (
+              ""
+            )
           ) : (
             <div>
               <label style={{ paddingLeft: "10%" }}>
@@ -158,7 +195,7 @@ function Commande() {
                   <select
                     required
                     className="formLigne formLigneAdresse"
-                    value={CB ? CB.Type_CB : "Visa"}
+                    defaultValue={CB ? CB[0].Type_CB : "Visa"}
                     style={{ width: "50%" }}
                   >
                     <option value="Visa">Visa</option>
@@ -169,7 +206,7 @@ function Commande() {
                     pattern="(0[0-1]|1[0-2])\/[0-9]{2}"
                     maxLength="5"
                     placeholder="MM/AA"
-                    value={CB ? CB.Date_expiration_CB : ""}
+                    defaultValue={CB ? CB[0].Date_expiration_CB : ""}
                     required
                     className="formLigne formLigneAdresse"
                     onKeyUp={(e) => {
@@ -185,20 +222,27 @@ function Commande() {
                 </div>
                 <input
                   type={"text"}
-                  value={CB ? CB.Numero_CB : ""}
+                  defaultValue={CB ? CB[0].Numero_CB : ""}
                   required
                   placeholder="Veuillez entrer votre numéro de carte bancaire"
                   className="formLigne formLigneAdresse"
                 />
                 <input
                   type={"text"}
-                  value={CB ? CB.Nom_CB : ""}
+                  defaultValue={CB ? CB[0].Nom_CB : ""}
                   required
                   placeholder="Veuillez entrer le nom inscrit sur votre carte"
                   className="formLigne formLigneAdresse"
                 />
               </label>
             </div>
+          )}
+          {reglementBoutique === "Boutique" ? (
+            <div style={{ marginLeft: "10%", width: "100%" }}>
+              <p>Vous devrez récupérer vos articles en magasin</p>
+            </div>
+          ) : (
+            ""
           )}
           <div
             style={{
@@ -209,17 +253,32 @@ function Commande() {
             }}
           >
             {CBSubmit ? (
-              <button
-                type={"button"}
-                onClick={HandleAdresse}
-                className="btn btn2R"
-              >
-                Remplir avec mon adresse
-              </button>
+              reglementBoutique === "CB" ? (
+                <button
+                  type={"button"}
+                  onClick={HandleAdresse}
+                  className="btn btn2R"
+                >
+                  Remplir avec mon adresse
+                </button>
+              ) : (
+                ""
+              )
             ) : (
               <button type={"button"} onClick={HandleCB} className="btn btn2R">
                 Remplir automatiquement
               </button>
+            )}
+            {!CBSubmit ? (
+              <button
+                type={"submit"}
+                onClick={HandleReglement}
+                className="btn btn2R"
+              >
+                Je souhaite régler en boutique
+              </button>
+            ) : (
+              ""
             )}
             <button
               type={"submit"}

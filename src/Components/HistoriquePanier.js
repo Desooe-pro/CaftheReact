@@ -22,8 +22,8 @@ function HistoriquePanier({ paniers, status }) {
 
   return (
     <div>
-      {paniers.map((panier) => (
-        <div className="MenuDiv">
+      {paniers.map((panier, id) => (
+        <div key={id} className="MenuDiv">
           <div
             style={{ width: "100%" }}
             onClick={() => HandleDeroule(panier.Id_Panier)}

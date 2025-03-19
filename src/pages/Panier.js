@@ -15,9 +15,11 @@ function Panier() {
   const [detailsPrix, setDetailsPrix] = useState(false);
   const user = JSON.parse(localStorage.getItem("user"));
 
-  if (!isAuthenticated) {
-    navigate("/");
-  }
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate("/");
+    }
+  }, []);
 
   useEffect(() => {
     const fetchLignes = async () => {
