@@ -73,7 +73,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 5px 10px;
     border-radius: 15px;
     background: linear-gradient(120deg, #880000, #dd0000);
     color: #ffffff;
@@ -82,4 +81,45 @@
 
 .SupBTN:hover {
     background: linear-gradient(120deg, #dd0000, #880000);
+}
+
+.LigneResp {
+    display: flex;
+    justify-content: space-around;
+    min-width: fit-content;
+}
+
+.LigneProduitResp {
+    width: 80%;
+}
+
+.SuprDivResp {
+    display: flex;
+    width: 10%;
+    justify-content: center;
+}
+
+@media screen and (max-width: 769px) {
+    .LigneResp {
+        width: 100%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .LigneProduitResp {
+        display: flex;
+        align-items: center;
+        width: 90%;
+    }
+
+    .SuprDivResp {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .BoutonSuprResp {
+        width: 20%;
+    }
 }

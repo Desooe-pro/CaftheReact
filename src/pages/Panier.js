@@ -110,7 +110,7 @@ function Panier() {
   }
 
   return (
-    <div style={{ display: "flex", flexDirection: "row" }}>
+    <div className={"PanierResp"}>
       <div className="PanierPanier">
         <h2 style={{ textAlign: "center" }}>Votre panier</h2>
         {panier !== null && panier.Nombre_de_lignes_Panier !== 0 ? (

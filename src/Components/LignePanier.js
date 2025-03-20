@@ -100,44 +100,44 @@ function LignePanier({ ligne, Id, status, Reload }) {
   return (
     <div style={{ width: "100%" }}>
       {status === "ouvert" ? (
-        <div style={{ display: "flex", width: "90%" }}>
-          <div style={{ width: "10%" }}></div>
-          <div id="Ligne">
-            <div style={{ width: "30%" }}>
-              <p>{produit.Designation_Article}</p>
-            </div>
-            <div className="nb">
-              <button className={"btnNBDown"} onClick={HandleSub}>
-                ▼
-              </button>
-              <form method="post" onSubmit={(e) => HandleForm(e)}>
-                <input
-                  className="formLignePanier"
-                  type={"text"}
-                  defaultValue={`${ligne.Quantite_Ligne_de_panier}`}
-                  style={{ width: "100%", textAlign: "center" }}
-                />
-              </form>
-              <button className={"btnNBUp"} onClick={HandleAdd}>
-                ▲
-              </button>
-            </div>
-            <div style={{ width: "15%", textAlign: "end" }}>
-              <p>
-                {(
-                  produit.Prix_unitaire_Article * ligne.Quantite_Ligne_de_panier
-                ).toFixed(2)}{" "}
-                €
-              </p>
+        <div className={"LigneResp"}>
+          <div className={"LigneProduitResp"}>
+            <div id="Ligne">
+              <div style={{ width: "35%" }}>
+                <p>{produit.Designation_Article}</p>
+              </div>
+              <div className="nb">
+                <button className={"btnNBDown"} onClick={HandleSub}>
+                  ▼
+                </button>
+                <form method="post" onSubmit={(e) => HandleForm(e)}>
+                  <input
+                    className="formLignePanier"
+                    type={"text"}
+                    defaultValue={`${ligne.Quantite_Ligne_de_panier}`}
+                    style={{ width: "100%", textAlign: "center" }}
+                  />
+                </form>
+                <button className={"btnNBUp"} onClick={HandleAdd}>
+                  ▲
+                </button>
+              </div>
+              <div style={{ width: "20%", textAlign: "end" }}>
+                <p>
+                  {(
+                    produit.Prix_unitaire_Article *
+                    ligne.Quantite_Ligne_de_panier
+                  ).toFixed(2)}{" "}
+                  €
+                </p>
+              </div>
             </div>
           </div>
-          <button
-            style={{ width: "10%" }}
-            className="SupBTN"
-            onClick={HandleSup}
-          >
-            🗑
-          </button>
+          <div className={"SuprDivResp"}>
+            <button className="SupBTN BoutonSuprResp" onClick={HandleSup}>
+              🗑
+            </button>
+          </div>
         </div>
       ) : (
         <div style={{ display: "flex", width: "100%" }}>

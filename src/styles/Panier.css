@@ -1,3 +1,7 @@
+.PanierResp {
+    display: flex;
+}
+
 .PanierPanier {
     width: 60%;
     min-height: 90vh;
@@ -28,4 +32,24 @@
 
 .btnP:hover {
     background: linear-gradient(-90deg, #f6b669, #f3c186);
+}
+
+@media screen and (max-width: 769px) {
+    .PanierResp {
+        flex-direction: column;
+    }
+
+    .PanierPanier {
+        width: 100%;
+        min-height: fit-content;
+        border: 0;
+        border-bottom: 1px solid black;
+        padding-bottom: 20px;
+    }
+
+    .HistoriquePanier {
+        width: 100%;
+        min-height: fit-content;
+        border: 0;
+    }
 }
