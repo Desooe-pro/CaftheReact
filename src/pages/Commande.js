@@ -13,6 +13,9 @@ function Commande() {
   const [CB, setCB] = useState(false);
   const [CBSubmit, setCBSubmit] = useState(false);
   const [reglementBoutique, setReglementBoutique] = useState(false);
+  const [recupere, setRecupere] = useState({
+    Panier: false,
+  });
   const user = JSON.parse(localStorage.getItem("user"));
   const adresseLoc = JSON.parse(localStorage.getItem("adresse"));
 
@@ -52,23 +55,43 @@ function Commande() {
     setCBSubmit(true);
   };
 
-  useEffect(() => {
-    const fetchLignesCommande = async () => {
-      try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_API_URL}/api/paniers/client/open/${user.id}`,
-        );
-        setPanier(response.data);
-      } catch (error) {
-        console.error("Erreur de chargement des produits ", error);
-      }
-    };
+  const fetchLignesCommande = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_URL}/api/paniers/client/open/${user.id}`,
+      );
+      recupere.Panier = true;
+      setPanier(response.data);
+    } catch (error) {
+      console.error("Erreur de chargement des produits ", error);
+    }
+  };
+
+  const fetchAdresse = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_URL}/api/adresse/client/${user.id}`,
+      );
+      setAdresse(response.data);
+    } catch (error) {}
+  };
+
+  const fetchCB = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_URL}/api/CB/client/${user.id}`,
+      );
+      setCB(response.data);
+    } catch (error) {
+      setCB(false);
+    }
+  };
+
+  if (!recupere.Panier) {
     void fetchLignesCommande();
-  });
+  }
 
   const registerCommande = async (e) => {
-    console.log(e.target[1]);
-    console.log(e);
     if (e.target[1] !== undefined) {
       console.log("Passe");
       try {
@@ -107,26 +130,6 @@ function Commande() {
       } catch (error) {
         console.error(error);
       }
-    }
-  };
-
-  const fetchAdresse = async () => {
-    try {
-      const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/adresse/client/${user.id}`,
-      );
-      setAdresse(response.data);
-    } catch (error) {}
-  };
-
-  const fetchCB = async () => {
-    try {
-      const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/CB/client/${user.id}`,
-      );
-      setCB(response.data);
-    } catch (error) {
-      setCB(false);
     }
   };
 

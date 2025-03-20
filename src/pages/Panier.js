@@ -9,61 +9,117 @@ import "../styles/Panier.css";
 function Panier() {
   const { isAuthenticated } = useContext(AuthContext);
   const navigate = useNavigate();
-  const [panier, setPanier] = useState({});
+  const [panier, setPanier] = useState(null);
   const [closed, setClosed] = useState({});
   const [commanded, setCommanded] = useState({});
   const [detailsPrix, setDetailsPrix] = useState(false);
+  const [affichagePrix, setAffichagePrix] = useState({
+    HT: 0,
+    TVA: 0,
+    TTC: 0,
+    Reload: true,
+  });
+  const [recupere, setRecupere] = useState({
+    Panier: false,
+    commanded: false,
+    closed: false,
+  });
   const user = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
     if (!isAuthenticated) {
       navigate("/");
     }
-  }, []);
-
-  useEffect(() => {
-    const fetchLignes = async () => {
-      try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_API_URL}/api/paniers/client/open/${user.id}`,
-        );
-        setPanier(response.data);
-      } catch (error) {}
-    };
-    void fetchLignes();
-  }, []);
-
-  useEffect(() => {
-    const fetchClosedLignes = async () => {
-      try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_API_URL}/api/paniers/client/closed/${user.id}`,
-        );
-        setClosed(response.data);
-      } catch (error) {}
-    };
-    void fetchClosedLignes();
   });
 
-  useEffect(() => {
-    const fetchCommandedLignes = async () => {
-      try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_API_URL}/api/paniers/client/commanded/${user.id}`,
-        );
-        setCommanded(response.data);
-      } catch (error) {}
-    };
+  const Reload = () => {
+    recupere.Panier = recupere.commanded = recupere.closed = false;
+    setAffichagePrix({
+      HT: 0,
+      TVA: 0,
+      TTC: 0,
+      Reload: true,
+    });
+    setPanier(null);
+    setCommanded({});
+    setClosed({});
+  };
+
+  const ReloadPrix = () => {
+    recupere.Panier = recupere.commanded = recupere.closed = false;
+    setAffichagePrix({
+      HT: 0,
+      TVA: 0,
+      TTC: 0,
+      Reload: false,
+    });
+    setPanier(null);
+    setCommanded({});
+    setClosed({});
+  };
+
+  const fetchLignes = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_URL}/api/paniers/client/open/${user.id}`,
+      );
+      setPanier(response.data);
+    } catch (error) {}
+  };
+
+  const fetchClosedLignes = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_URL}/api/paniers/client/closed/${user.id}`,
+      );
+      setClosed(response.data);
+    } catch (error) {}
+  };
+
+  const fetchCommandedLignes = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_URL}/api/paniers/client/commanded/${user.id}`,
+      );
+      setCommanded(response.data);
+    } catch (error) {}
+  };
+
+  if (!recupere.Panier) {
+    void fetchLignes();
+    recupere.Panier = true;
+  }
+  if (!recupere.commanded) {
+    void fetchClosedLignes();
+    recupere.commanded = true;
+  }
+  if (!recupere.closed) {
     void fetchCommandedLignes();
-  }, [panier]);
+    recupere.closed = true;
+  }
+
+  if (panier !== null && affichagePrix.HT === 0) {
+    setAffichagePrix({
+      HT: panier.Prix_HT_Panier,
+      TVA: panier.Prix_TVA_Panier,
+      TTC: panier.Montant_Panier,
+    });
+    if (affichagePrix.Reload) {
+      ReloadPrix();
+    }
+  }
 
   return (
     <div style={{ display: "flex", flexDirection: "row" }}>
       <div className="PanierPanier">
         <h2 style={{ textAlign: "center" }}>Votre panier</h2>
-        {panier.Id_Panier && panier.Nombre_de_lignes_Panier !== 0 ? (
+        {panier !== null && panier.Nombre_de_lignes_Panier !== 0 ? (
           <div>
-            <LignesPanier Id_Panier={panier.Id_Panier} status={"ouvert"} />
+            <LignesPanier
+              Id_Panier={panier.Id_Panier}
+              status={"ouvert"}
+              Reload={Reload}
+            />
             <div style={{ width: "100%" }}>
               <div style={{ display: "flex" }}>
                 <div style={{ display: "flex", width: "80.5%" }}>
@@ -97,13 +153,13 @@ function Panier() {
                 >
                   {detailsPrix ? (
                     <div className="detailsPrix">
-                      <div>Prix HT : {panier.Prix_HT_Panier} €</div>
-                      <div>TVA : {panier.Prix_TVA_Panier} €</div>
-                      <div>Prix TTC : {panier.Montant_Panier} €</div>
+                      <div>Prix HT : {affichagePrix.HT} €</div>
+                      <div>TVA : {affichagePrix.TVA} €</div>
+                      <div>Prix TTC : {affichagePrix.TTC} €</div>
                     </div>
                   ) : (
                     <div className="Prix">
-                      <div>{panier.Montant_Panier} €</div>
+                      <div>{affichagePrix.TTC} €</div>
                     </div>
                   )}
                 </div>
@@ -119,13 +175,21 @@ function Panier() {
       <div className="HistoriquePanier">
         <h2>Commandes en cours</h2>
         {commanded.length > 0 ? (
-          <HistoriquePanier paniers={commanded} status={"commanded"} />
+          <HistoriquePanier
+            paniers={commanded}
+            status={"commanded"}
+            Reload={Reload}
+          />
         ) : (
           "Vous n'avez pas de commandes en cours"
         )}
         <h2>Commandes reçus</h2>
         {closed.length > 0 ? (
-          <HistoriquePanier paniers={closed} status={"closed"} />
+          <HistoriquePanier
+            paniers={closed}
+            status={"closed"}
+            Reload={Reload}
+          />
         ) : (
           "Vous n'avez pas de commandes déjà livrés"
         )}
