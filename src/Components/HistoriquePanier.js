@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import LignesPanier from "./LignesPanier";
 import "../styles/Historique.css";
 
-function HistoriquePanier({ paniers, status }) {
+function HistoriquePanier({ paniers, status, Reload }) {
   const [deroule, setDeroule] = useState(null);
 
   const HandleDeroule = (id) => {
@@ -15,7 +15,11 @@ function HistoriquePanier({ paniers, status }) {
 
   const CreateLignes = (panier, classe) => {
     const lignes = (
-      <LignesPanier Id_Panier={panier.Id_Panier} status={status} />
+      <LignesPanier
+        Id_Panier={panier.Id_Panier}
+        status={status}
+        Reload={Reload}
+      />
     );
     return <div className={classe}>{lignes}</div>;
   };

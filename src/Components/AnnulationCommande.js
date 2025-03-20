@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-function AnnulationCommande({ id }) {
+function AnnulationCommande({ id, Reload }) {
   const user = JSON.parse(localStorage.getItem("user"));
   const [State, setState] = useState(false);
 
@@ -11,13 +11,12 @@ function AnnulationCommande({ id }) {
         `${process.env.REACT_APP_API_URL}/api/commande/annule/${id}`,
         { userId: user.id },
       );
-    } catch (error) {
-      console.error(error);
-    }
+    } catch (error) {}
   };
 
   function HandleAnnule() {
     void annuleCommande();
+    Reload();
   }
 
   return (

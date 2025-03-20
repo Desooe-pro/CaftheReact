@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import AnnulationCommande from "./AnnulationCommande";
 
-function LignePanier({ ligne, Id, status }) {
+function LignePanier({ ligne, Id, status, Reload }) {
   const [produit, setProduit] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
@@ -15,36 +14,30 @@ function LignePanier({ ligne, Id, status }) {
           );
           setProduit(response.data);
         }
-      } catch (error) {
-        console.error("Erreur de chargement des produits ", error);
-      }
+      } catch (error) {}
     };
     void fetchLignes();
-  }, []);
+  });
 
   const addProduit = async () => {
     if (ligne.Id_Panier) {
       try {
-        const response = await axios.post(
+        await axios.post(
           `${process.env.REACT_APP_API_URL}/api/lignedepanier/add`,
           { Id_Panier: ligne.Id_Panier, Id_Article: ligne.Id_Article },
         );
-      } catch (error) {
-        console.error("Erreur de chargement des produits ", error);
-      }
+      } catch (error) {}
     }
   };
 
   const subProduit = async () => {
     if (ligne.Id_Panier) {
       try {
-        const response = await axios.post(
+        await axios.post(
           `${process.env.REACT_APP_API_URL}/api/lignedepanier/sub`,
           { Id_Panier: ligne.Id_Panier, Id_Article: ligne.Id_Article },
         );
-      } catch (error) {
-        console.error("Erreur de chargement des produits ", error);
-      }
+      } catch (error) {}
     }
   };
 
@@ -64,8 +57,6 @@ function LignePanier({ ligne, Id, status }) {
           alert(
             "Vous essayez de mettre plus d'articles dans votre panier qu'il n'y en a en stock",
           );
-        } else {
-          console.error("Erreur de chargement des produits ", error);
         }
       }
     }
@@ -81,31 +72,29 @@ function LignePanier({ ligne, Id, status }) {
             Id_Article: ligne.Id_Article,
           },
         );
-      } catch (error) {
-        console.error("Erreur de chargement des produits ", error);
-      }
+      } catch (error) {}
     }
   };
 
   const HandleAdd = () => {
     void addProduit();
-    navigate("/reload/panier");
+    Reload();
   };
 
   const HandleSub = () => {
     void subProduit();
-    navigate("/reload/panier");
+    Reload();
   };
 
   const HandleForm = (e) => {
     e.preventDefault();
     void nbProduit(e);
-    navigate("/reload/panier");
+    Reload();
   };
 
   const HandleSup = () => {
     void SupProduit();
-    navigate("/reload/panier");
+    Reload();
   };
 
   return (
