@@ -1,3 +1,9 @@
+@media screen and (min-width:770px) {
+    .FlecheTags {
+        display: none;
+    }
+}
+
 #search-bar {
     width: 80%;
     height: 40px;
@@ -31,7 +37,7 @@
 .FieldTags {
     display: flex;
     flex-direction: column;
-    align-items: start;
+    align-items: center;
     font-size: 18px;
     width: 90%;
     border: 0;
@@ -40,9 +46,16 @@
     margin: 0 auto;
 }
 
+.FieldTags div:last-child {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+}
+
 .FieldTags legend {
     max-width: 250px;
-    font-size: 0.95em;
+    font-size: 0.9em;
 }
 
 .button {
@@ -91,5 +104,41 @@
 
     .Liste {
         margin: 0 auto;
+    }
+}
+
+@media screen and (max-width: 769px) {
+    .TagsOff {
+        height: 0;
+        overflow: hidden;
+    }
+
+    .CloseTags {
+        animation: 0.5s ease-in closeTags;
+        overflow: hidden;
+    }
+
+    .TagsOn {
+        animation: 0.5s ease-in openTags;
+        overflow: hidden;
+        height: 160px;
+    }
+
+    @keyframes openTags {
+        from {
+            height:0;
+        }
+        to {
+            height: 160px;
+        }
+    }
+
+    @keyframes closeTags {
+        from {
+            height: 160px;
+        }
+        to {
+            height: 0;
+        }
     }
 }

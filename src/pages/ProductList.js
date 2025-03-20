@@ -28,6 +28,11 @@ function ProductList() {
   ]);
   const [TriePrix, setTriePrix] = useState(false);
   const [TrieAlpha, setTrieAlpha] = useState(false);
+  const [TrieTagsOn, setTrieTagsOn] = useState({ on: false, first: true });
+  const [TrieMesuresOn, setTrieMesuresOn] = useState({
+    on: false,
+    first: true,
+  });
 
   function HandlePrecedent() {
     if (affiche >= 18) {
@@ -406,88 +411,154 @@ function ProductList() {
         >
           <div className="cate">
             <fieldset className="FieldTags">
-              <legend>
-                Sélectionnez les catégories que vous souhaitez garder :
-              </legend>
-              <div className="switch-container">
-                <input
-                  type="checkbox"
-                  id="Thé"
-                  name="Thé"
-                  className="slideThree"
-                  onClick={(e) => HandleCheck(e.target, 0)}
-                />
-                <label htmlFor="Thé" style={{ visibility: "hidden" }}>
-                  <span></span>
-                </label>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-around",
+                }}
+                onClick={() =>
+                  setTrieTagsOn({ on: !TrieTagsOn.on, first: false })
+                }
+              >
+                {TrieTagsOn.on ? (
+                  <div className={"FlecheTags"}>
+                    <h2 style={{ margin: "0" }}>˄</h2>
+                  </div>
+                ) : (
+                  <div className={"FlecheTags"}>
+                    <h2 style={{ margin: "0" }}>˅</h2>
+                  </div>
+                )}
+                <div>
+                  <legend>
+                    Sélectionnez les filtres que vous souhaitez garder :
+                  </legend>
+                </div>
               </div>
-              <div className="switch-container">
-                <input
-                  type="checkbox"
-                  id="Café"
-                  name="Café"
-                  className="slideThree"
-                  onClick={(e) => HandleCheck(e.target, 1)}
-                />
-                <label htmlFor="Café" style={{ visibility: "hidden" }}>
-                  <span></span>
-                </label>
-              </div>
-              <div className="switch-container">
-                <input
-                  type="checkbox"
-                  id="Accéssoire"
-                  name="Accéssoire"
-                  className="slideThree"
-                  onClick={(e) => HandleCheck(e.target, 2)}
-                />
-                <label htmlFor="Accéssoire" style={{ visibility: "hidden" }}>
-                  <span></span>
-                </label>
+              <div
+                className={
+                  TrieTagsOn.on
+                    ? "TagsOn"
+                    : TrieTagsOn.first
+                      ? "TagsOff"
+                      : "TagsOff CloseTags"
+                }
+              >
+                <div className="switch-container">
+                  <input
+                    type="checkbox"
+                    id="Thé"
+                    name="Thé"
+                    className="slideThree"
+                    onClick={(e) => HandleCheck(e.target, 0)}
+                  />
+                  <label htmlFor="Thé" style={{ visibility: "hidden" }}>
+                    <span></span>
+                  </label>
+                </div>
+                <div className="switch-container">
+                  <input
+                    type="checkbox"
+                    id="Café"
+                    name="Café"
+                    className="slideThree"
+                    onClick={(e) => HandleCheck(e.target, 1)}
+                  />
+                  <label htmlFor="Café" style={{ visibility: "hidden" }}>
+                    <span></span>
+                  </label>
+                </div>
+                <div className="switch-container">
+                  <input
+                    type="checkbox"
+                    id="Accéssoire"
+                    name="Accéssoire"
+                    className="slideThree"
+                    onClick={(e) => HandleCheck(e.target, 2)}
+                  />
+                  <label htmlFor="Accéssoire" style={{ visibility: "hidden" }}>
+                    <span></span>
+                  </label>
+                </div>
               </div>
             </fieldset>
           </div>
           <div className="cate">
             <fieldset className="FieldTags">
-              <legend>Sélectionnez le tri que vous souhaitez garder :</legend>
-              <div className="switch-container">
-                <input
-                  type="checkbox"
-                  id="Poids"
-                  name="Poids"
-                  className="slideThree"
-                  defaultChecked={TagsMesure[0].active}
-                  onClick={(e) => HandleCheckMesure(e.target, 0)}
-                />
-                <label htmlFor="Poids" style={{ visibility: "hidden" }}>
-                  <span></span>
-                </label>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-around",
+                }}
+                onClick={() =>
+                  setTrieMesuresOn({ on: !TrieMesuresOn.on, first: false })
+                }
+              >
+                {TrieMesuresOn.on ? (
+                  <div className={"FlecheTags"}>
+                    <h2 style={{ margin: "0" }}>˄</h2>
+                  </div>
+                ) : (
+                  <div className={"FlecheTags"}>
+                    <h2 style={{ margin: "0" }}>˅</h2>
+                  </div>
+                )}
+                <div>
+                  <legend>
+                    Sélectionnez le tri que vous souhaitez garder :
+                  </legend>
+                </div>
               </div>
-              <div className="switch-container">
-                <input
-                  type="checkbox"
-                  id="Boite"
-                  name="Boite"
-                  className="slideThree"
-                  defaultChecked={TagsMesure[2].active}
-                  onClick={(e) => HandleCheckMesure(e.target, 2)}
-                />
-                <label htmlFor="Boite" style={{ visibility: "hidden" }}>
-                  <span></span>
-                </label>
-              </div>
-              <div className="switch-container">
-                <input
-                  type="checkbox"
-                  id="Unite"
-                  name="Unite"
-                  className="slideThree"
-                  defaultChecked={TagsMesure[1].active}
-                  onClick={(e) => HandleCheckMesure(e.target, 1)}
-                />
-                <label htmlFor="Unite" style={{ visibility: "hidden" }}>
-                  <span></span>
-                </label>
+              <div
+                className={
+                  TrieMesuresOn.on
+                    ? "TagsOn"
+                    : TrieTagsOn.first
+                      ? "TagsOff"
+                      : "TagsOff CloseTags"
+                }
+              >
+                <div className="switch-container">
+                  <input
+                    type="checkbox"
+                    id="Poids"
+                    name="Poids"
+                    className="slideThree"
+                    defaultChecked={TagsMesure[0].active}
+                    onClick={(e) => HandleCheckMesure(e.target, 0)}
+                  />
+                  <label htmlFor="Poids" style={{ visibility: "hidden" }}>
+                    <span></span>
+                  </label>
+                </div>
+                <div className="switch-container">
+                  <input
+                    type="checkbox"
+                    id="Boite"
+                    name="Boite"
+                    className="slideThree"
+                    defaultChecked={TagsMesure[2].active}
+                    onClick={(e) => HandleCheckMesure(e.target, 2)}
+                  />
+                  <label htmlFor="Boite" style={{ visibility: "hidden" }}>
+                    <span></span>
+                  </label>
+                </div>
+                <div className="switch-container">
+                  <input
+                    type="checkbox"
+                    id="Unite"
+                    name="Unite"
+                    className="slideThree"
+                    defaultChecked={TagsMesure[1].active}
+                    onClick={(e) => HandleCheckMesure(e.target, 1)}
+                  />
+                  <label htmlFor="Unite" style={{ visibility: "hidden" }}>
+                    <span></span>
+                  </label>
+                </div>
               </div>
             </fieldset>
           </div>
@@ -628,7 +699,7 @@ function ProductList() {
               }
             />
 
-            <a href={affiche < 18 ? "#Bouton" : "#search-bar"}>
+            <a href={affiche < 18 ? "#Bouton" : "#"}>
               <button
                 id={"Bouton"}
                 className={affiche >= 18 ? "btn btn2L" : "btnDown btnDownL"}
@@ -638,7 +709,7 @@ function ProductList() {
                 ◀ Précédent
               </button>
             </a>
-            <a href={affiche + 1 > produit.length ? "#Bouton" : "#search-bar"}>
+            <a href={affiche + 1 > produit.length ? "#Bouton" : "#"}>
               <button
                 className={
                   affiche < produit.length ? "btn btn2R" : "btnDown btnDownR"
