@@ -149,7 +149,7 @@ function LignePanier({ ligne, Id, status, Reload }) {
                     <input
                       className="formLignePanier"
                       type={"text"}
-                      defaultValue={"0"}
+                      defaultValue={`${ligne.Quantite_Ligne_de_panier}`}
                       style={{ width: "100%", textAlign: "center" }}
                     />
                   </form>
