@@ -91,6 +91,24 @@
     .adresseCo input {
         width: 49%;
     }
+
+    @keyframes slideRightBTN {
+        from {
+            transform: translateX(-500%);
+        }
+        to {
+            transform: translateX(0%);
+        }
+    }
+
+    @keyframes slideRightBTNOut {
+        from {
+            transform: translateX(0%);
+        }
+        to {
+            transform: translateX(-400%);
+        }
+    }
 }
 
 @media screen and (max-width: 768px) {
@@ -100,7 +118,7 @@
 
     .Login, .LoginCreate {
         width: 100%;
-        background: #c2c2c2;
+        background: #5a3e24;
         box-sizing: border-box;
         border: 1px solid black;
         border-radius: 0 0 40px 40px;
@@ -125,7 +143,7 @@
 
     .Create, .CreateCreate {
         width: 100%;
-        background: #c2c2c2;
+        background: #63714a;
         box-sizing: border-box;
         border: 1px solid black;
         border-radius: 40px 40px 0 0;
@@ -194,7 +212,7 @@
             height: 762px;
         }
         to {
-            height: 152px;
+            height: 195px;
         }
     }
 
@@ -209,7 +227,7 @@
 
     @keyframes ExtendCreate {
         from {
-            height: 152px;
+            height: 195px;
         }
         to {
             height: 762px;
@@ -243,6 +261,24 @@
             width: 100%;
             opacity: 0;
             transform: translateX(-1000px);
+        }
+    }
+
+    @keyframes slideRightBTN {
+        from {
+            transform: translateX(400%);
+        }
+        to {
+            transform: translateX(0%);
+        }
+    }
+
+    @keyframes slideRightBTNOut {
+        from {
+            transform: translateX(-50%);
+        }
+        to {
+            transform: translateX(400%);
         }
     }
 }
@@ -358,23 +394,5 @@
     to {
         width: 60%;
         transform: translateX(100%);
-    }
-}
-
-@keyframes slideRightBTN {
-    from {
-        transform: translateX(-500%);
-    }
-    to {
-        transform: translateX(0%);
-    }
-}
-
-@keyframes slideRightBTNOut {
-    from {
-        transform: translateX(0%);
-    }
-    to {
-        transform: translateX(-400%);
     }
 }

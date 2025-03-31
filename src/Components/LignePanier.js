@@ -27,7 +27,13 @@ function LignePanier({ ligne, Id, status, Reload }) {
           `${process.env.REACT_APP_API_URL}/api/lignedepanier/add`,
           { Id_Panier: ligne.Id_Panier, Id_Article: ligne.Id_Article },
         );
-      } catch (error) {}
+      } catch (error) {
+        if (error.status === 300) {
+          alert(
+            "Vous essayez de mettre plus d'articles dans votre panier qu'il n'y en a en stock",
+          );
+        }
+      }
     }
   };
 
