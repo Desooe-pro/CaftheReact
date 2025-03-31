@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 /* npm install axios */
 /* npm install react-loading-skeleton */
@@ -7,11 +7,11 @@ import "react-loading-skeleton/dist/skeleton.css";
 import "../styles/Liste.css";
 import "../styles/Checkbox.css";
 import Liste from "../Components/Liste";
-axios.defaults.headers.common["Authorization"] =
-  `Bearer ${localStorage.getItem("token")}`;
+import { AuthContext } from "../context/AuthContext";
 
 function ProductList() {
   const collator = new Intl.Collator("fr", { sensitivity: "base" });
+  const { isAuthenticated } = useContext(AuthContext);
   const [produits, setProduits] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [affiche, setAffiche] = useState(9);

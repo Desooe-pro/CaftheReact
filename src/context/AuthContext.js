@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
+import axios from "axios";
 
 /* Exportation du contexte pour y avoir accès */
 export const AuthContext = createContext(null);
@@ -27,6 +28,8 @@ export function AuthProvider({ children }) {
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(user));
       localStorage.setItem("adresse", JSON.stringify(adresse));
+      axios.defaults.headers.common["Authorization"] =
+        `Bearer ${localStorage.getItem("token")}`;
     } else {
       localStorage.removeItem("token");
       localStorage.removeItem("user");
