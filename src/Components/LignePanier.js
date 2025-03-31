@@ -6,8 +6,6 @@ function LignePanier({ ligne, Id, status, Reload }) {
   const [produit, setProduit] = useState(null);
   const navigate = useNavigate();
 
-  console.log(produit);
-
   useEffect(() => {
     const fetchLignes = async () => {
       try {
