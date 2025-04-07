@@ -93,7 +93,7 @@
     color: #00000088;
 }
 
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 1200px) {
     #search-bar {
         max-width: 200px;
     }
