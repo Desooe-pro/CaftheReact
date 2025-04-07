@@ -1,0 +1,19 @@
+.FooterDiv {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: #ccbfa6;
+    border: 3px solid #72644b;
+    box-sizing: border-box;
+    border-radius: 50px 50px 0 0;
+    min-height: 150px;
+    margin-top: 20px;
+}
+
+.linkFooter {
+    font-size: 1.2em;
+}
+
+.linkFooter:hover {
+    color: #574c3a;
+}

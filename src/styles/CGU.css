@@ -1,0 +1,18 @@
+.mainCGU {
+    width: 95%;
+    margin: 0 auto;
+}
+
+.pCGU {
+    width: 95%;
+    font-size: 1.1em;
+    text-indent: 40px;
+}
+
+.pCGU > a {
+    color: grey;
+}
+
+.pCGU > a:hover {
+    color: #8f7d5e;
+}

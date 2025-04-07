@@ -12,6 +12,10 @@ import Compte from "./pages/Compte";
 import Reload from "./pages/Reload";
 import Test from "./Components/test";
 import Commande from "./pages/Commande";
+import CGU from "./pages/CGU";
+import CGV from "./pages/CGV";
+import PolitiqueConfidentialit from "./pages/PolitiqueConfidentialite";
+import PolitiqueConfidentialite from "./pages/PolitiqueConfidentialite";
 
 function App() {
   return (
@@ -28,6 +32,9 @@ function App() {
             <Route path="commande/:Id_Panier" element={<Commande />} />
             <Route path="reload/:link" element={<Reload />} />
             <Route path="test" element={<Test />} />
+            <Route path={"cgu"} element={<CGU />} />
+            <Route path={"cgv"} element={<CGV />} />
+            <Route path={"polconf"} element={<PolitiqueConfidentialite />} />
             {/*Gestion des pages non trouvées*/}
             <Route path="*" element={<NotFound />} />
           </Route>
